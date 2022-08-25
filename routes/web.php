@@ -69,6 +69,15 @@ Route::prefix('pesanan')->group(function () {
     Route::get('/destroy/{id}', [App\Http\Controllers\Backend\PesananController::class, 'destroy'])->name('pesanan.destroy');
 });
 
+// Laporan
+// Route::prefix('menu')->middleware('admin', 'auth')->group(function () {
+Route::prefix('laporan')->group(function () {
+    Route::get('/', [App\Http\Controllers\Backend\LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/detail/{id}', [App\Http\Controllers\Backend\LaporanController::class, 'detail'])->name('laporan.detail');
+    Route::get('/detail-print', [App\Http\Controllers\Backend\LaporanController::class, 'detailPrint'])->name('laporan.detail-print');
+    Route::get('/destroy/{id}', [App\Http\Controllers\Backend\LaporanController::class, 'destroy'])->name('laporan.destroy');
+});
+
 
 // Loker
 // Route::prefix('loekr')->middleware('admin', 'auth')->group(function () {
