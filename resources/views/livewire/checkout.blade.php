@@ -52,6 +52,18 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="text-black">Metode Pembayaran</label>
+                                            <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Transfer
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Cash on Delivery
+  </label>
+</div>
 
                                         </div>
                                         <div class="form-group">
