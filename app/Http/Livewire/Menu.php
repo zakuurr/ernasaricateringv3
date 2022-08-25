@@ -12,14 +12,23 @@ class Menu extends Component
 {
     use WithPagination;
 
-    public $searchTerm;
+    public $search;
 
     protected $paginationTheme = 'bootstrap';
 
+    public function mount() {
+    $this->fill(request()->only('search'));
+    }
+
+    public function updatingSearch() {
+    $this->resetPage();
+    }
     public function render()
     {
+
         return view('livewire.menu',[
-            'menus' => BackendMenu::paginate(6),
+            'menus' => BackendMenu::where('nama_menu','LIKE','%'.$this->search.'%')->paginate(6),
+            'menus2' => BackendMenu::where('id_kategori',3)->paginate(3),
             'kategoris' => Kategori::all()
         ])->layout('layouts.base');
     }

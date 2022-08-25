@@ -14,7 +14,7 @@ class MenuDetail extends Component
 
     use AuthorizesRequests;
 
-    public $menu,$jumlah_pesanan;
+    public $menu,$jumlah_pesanan,$metode_p;
 
     public function mount($id)
     {
@@ -52,7 +52,7 @@ public function masukanKeranjang(){
         $pesanan->kode_pemesanan = 'PS-'.$pesanan->id;
         $pesanan->update();
     } else{
-        $pesanan->total_harga = $pesanan->total_harga+$total_harga;
+        $pesanan->total_harga = $pesanan->total_harga+$total_harga+$pesanan;
         $pesanan->update();
         }
 

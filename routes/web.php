@@ -23,6 +23,7 @@ Route::get('/history', \App\Http\Livewire\History::class)->name('history');
 Route::get('/info-loker', \App\Http\Livewire\Loker::class)->name('loker');
 Route::get('/info-loker/{id}', \App\Http\Livewire\LokerDetail::class)->name('loker.detail');
 Route::get('/kontak', \App\Http\Livewire\Kontak::class)->name('kontak');
+Route::get('/menu-kategori/{id_kategori}', \App\Http\Livewire\Category::class)->name('menu.kategori');
 
 //backend
 Route::get('/backend-page', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');
