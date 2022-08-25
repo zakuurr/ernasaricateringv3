@@ -31,6 +31,8 @@
             <input type="number" id="jumlah_pesanan" class="form-control text-center @error('jumlah_pesanan') is-invalid @enderror" wire:model="jumlah_pesanan" value="1 {{ old('jumlah_pesanan')}}">
           </div>
 
+
+
             @error('jumlah_pesanan')
             <span class="invalid-feedback" role="alert">
                     <strong>{{$message}}</strong>

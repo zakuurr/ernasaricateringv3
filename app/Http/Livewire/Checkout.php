@@ -9,20 +9,26 @@ use Livewire\Component;
 
 class Checkout extends Component
 {
-    public $total_harga,$nohp,$alamat;
+    public $total_harga,$nohp,$alamat,$metode_p;
 
     public function mount(){
         if(!Auth::User())
         {
             return redirect()->route('login');
         }
+
         $this->nohp = Auth::user()->nohp;
         $this->alamat = Auth::user()->alamat;
 
         $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
 
         if(!empty($pesanan)){
-            $this->total_harga = $pesanan->total_harga+$pesanan->kode_unik;;
+            if ($this->metode_p === 'COD') {
+
+                $this->total_harga = $pesanan->total_harga+$pesanan->kode_unik + 10000;
+            } else {
+                $this->total_harga = $pesanan->total_harga+$pesanan->kode_unik;
+        }
         } else
         {
             return redirect()->route('home');
@@ -43,6 +49,8 @@ class Checkout extends Component
     // update data pesanan
     $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
     $pesanan->status = 1;
+    $pesanan->metode_p = $this->metode_p;
+
     $pesanan->update();
 
     $this->emit('masukKeranjang');

@@ -25,6 +25,7 @@
                               <th class="product-name">Kode Pemesanan</th>
                               <th class="product-quantity">Pesanan</th>
                               <th class="product-total">Status</th>
+                              <th class="product-total">Metode Pembayaran</th>
                               <th class="product-total">Total Harga</th>
                             </tr>
                           </thead>
@@ -57,6 +58,9 @@
                                                 @else
                                                 <span class="badge badge-success"> Sudah Bayar </span>
                                                 @endif
+                                        </td>
+                                        <td>
+                                            {{$pesanan->metode_p}}</td>
                                         </td>
                                         <td>
                                            Rp. {{number_format($pesanan->total_harga,0,'.','.')}}
