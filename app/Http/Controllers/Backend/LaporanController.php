@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Models\Pesanan;
+use App\Models\PesananDetail;
+use DB;
 
 class LaporanController extends Controller
 {
@@ -22,31 +26,35 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(Request $request)
     {
         if($request->ajax())
 
             {
 
             $output="";
+            $tgl1 = Carbon::parse($request->tgl1)->translatedFormat('Y-m-d H:i:s');
+            $tgl2 = Carbon::parse($request->tgl2)->translatedFormat('Y-m-d H:i:s');
+            $pesanans = Pesanan::where('created_at','>=',$tgl1)->where('created_at','<=',$tgl2)->get();
 
-            $products=DB::table('products')->where('title','LIKE','%'.$request->search."%")->get();
-
-            if($products)
+            if($pesanans)
 
             {
 
-            foreach ($products as $key => $product) {
+            foreach ($pesanans as $key => $pesanan) {
 
             $output.='<tr>'.
 
-            '<td>'.$product->id.'</td>'.
+            '<td>'.$key + (1).'</td>'.
+            
+            '<td>'.$pesanan->kode_pemesanan.'</td>'.
 
-            '<td>'.$product->title.'</td>'.
+            '<td>'.$pesanan->user->name.'</td>'.
 
-            '<td>'.$product->description.'</td>'.
+            '<td>'.$pesanan->total_harga.'</td>'.
 
-            '<td>'.$product->price.'</td>'.
+            '<td>'.$pesanan->kode_unik.'</td>'.
+            '<td><span class="badge badge-danger">Belum hayar</span></td>'.
 
             '</tr>';
 

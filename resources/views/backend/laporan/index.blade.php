@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('css')
+<meta name="_token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
       <!-- Content Wrapper. Contains page content -->
 
@@ -11,8 +14,6 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <form action="">
-            @csrf
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="tgl1">Tanggal :</label>
@@ -29,7 +30,6 @@
                     <button type="submit" id="search" class="btn btn-success"><i class="fa fa-search"></i> Cari data</button>
                 </div>
             </div>
-        </form>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
@@ -39,7 +39,6 @@
             <th>Total Harga</th>
             <th>Kode Unik</th>
             <th>Status</th>
-            <th>Aksi</th>
           </tr>
           </thead>
           <tbody>
@@ -68,6 +67,14 @@
     <!-- /.card -->
 
 @section('js')
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+        });
+    });
+    
+    </script>
 <script>
 
 $('.tombol-hapus').on('click', function (e) {            
@@ -102,16 +109,17 @@ if (result.value) {
 <script type="text/javascript">
 
     $('#search').on('click',function(){
-    
-    $value=$(this).val();
-    
+        
+    $tgl1=$("#tgl1").val();
+    $tgl2=$("#tgl2").val();
+    console.log($tgl1);
     $.ajax({
     
     type : 'get',
     
     url : '{{url("laporan/search")}}',
     
-    data:{'tgl1':$value},
+    data:{'tgl1':$tgl1,'tgl2':$tgl2},
     
     success:function(data){
     
@@ -127,10 +135,6 @@ if (result.value) {
     
     </script>
     
-    <script type="text/javascript">
     
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-    
-    </script>
 @endsection
 @endsection
