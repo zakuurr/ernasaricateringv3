@@ -22,9 +22,47 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search()
     {
-        //
+        if($request->ajax())
+
+            {
+
+            $output="";
+
+            $products=DB::table('products')->where('title','LIKE','%'.$request->search."%")->get();
+
+            if($products)
+
+            {
+
+            foreach ($products as $key => $product) {
+
+            $output.='<tr>'.
+
+            '<td>'.$product->id.'</td>'.
+
+            '<td>'.$product->title.'</td>'.
+
+            '<td>'.$product->description.'</td>'.
+
+            '<td>'.$product->price.'</td>'.
+
+            '</tr>';
+
+            }
+
+
+
+            return Response($output);
+
+
+
+            }
+
+
+
+            }
     }
 
     /**

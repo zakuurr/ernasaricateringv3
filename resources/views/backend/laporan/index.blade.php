@@ -11,7 +11,25 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        {{-- <a href="{{ route('pesanan.create') }}" class="btn btn-success" style="margin-bottom:10px;">+ Tambah Menu</a> --}}
+        <form action="">
+            @csrf
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="tgl1">Tanggal :</label>
+                    <input type="date" class="form-control" required id="tgl1" name="tgl1" placeholder="Pilih Tanggal Awal">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="date" class="form-control" required id="tgl2" name="tgl2" placeholder="Pilih Tanggal Akhir">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="submit" id="search" class="btn btn-success"><i class="fa fa-search"></i> Cari data</button>
+                </div>
+            </div>
+        </form>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
@@ -49,7 +67,7 @@
     </div>
     <!-- /.card -->
 
-    @section('js')
+@section('js')
 <script>
 
 $('.tombol-hapus').on('click', function (e) {            
@@ -80,5 +98,39 @@ if (result.value) {
 });
 
 </script>
+
+<script type="text/javascript">
+
+    $('#search').on('click',function(){
+    
+    $value=$(this).val();
+    
+    $.ajax({
+    
+    type : 'get',
+    
+    url : '{{url("laporan/search")}}',
+    
+    data:{'tgl1':$value},
+    
+    success:function(data){
+    
+    $('tbody').html(data);
+    
+    }
+    
+    });
+    
+    
+    
+    })
+    
+    </script>
+    
+    <script type="text/javascript">
+    
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    
+    </script>
 @endsection
 @endsection
