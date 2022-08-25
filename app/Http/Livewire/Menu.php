@@ -18,10 +18,8 @@ class Menu extends Component
 
     public function render()
     {
-
-        $searchTerm = '%'.$this->searchTerm.'%';
         return view('livewire.menu',[
-            'menus' => BackendMenu::where('nama_menu','LIKE',$searchTerm)->paginate(6),
+            'menus' => BackendMenu::paginate(6),
             'kategoris' => Kategori::all()
         ])->layout('layouts.base');
     }

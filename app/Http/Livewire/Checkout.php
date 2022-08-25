@@ -38,7 +38,7 @@ class Checkout extends Component
        $user = User::where('id',Auth::user()->id)->first();
        $user->nohp = $this->nohp;
        $user->alamat = $this->alamat;
-    $user->update();
+       $user->update();
 
     // update data pesanan
     $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
