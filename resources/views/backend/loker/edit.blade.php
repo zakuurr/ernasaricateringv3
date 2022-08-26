@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Foto Makanan</label>
+                        <label for="password">Foto</label>
                         <input type="file" name="foto" id="foto" class="form-control input-md">
                     </div>
                         
