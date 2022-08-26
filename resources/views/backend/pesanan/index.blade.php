@@ -31,7 +31,15 @@
               <td>{{ $item->user->name }}</td>
               <td>{{ $item->total_harga }}</td>
               <td>{{ $item->kode_unik }}</td>
-              <td><span class="badge badge-danger">Belum Bayar</span></td>
+              <td>
+                @if ($item->status==1)
+                <span class="badge badge-danger">Belum Bayar</span>    
+                @else
+                <span class="badge badge-success">Sudah Bayar</span>    
+                @endif
+                
+              
+              </td>
               <td>
                 <center>
                   <a class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>

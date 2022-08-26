@@ -30,15 +30,15 @@
                       </tr>
                       <tr>
                         <td width="20%">No. Hp</td>
-                        <td>-</td> 
+                        <td>{{ $user->nohp }}</td> 
                       </tr>
                       <tr>
                         <td width="20%">Alamat</td>
-                        <td>-</td>
+                        <td>{{ $user->alamat }}</td>
                       </tr>
                       <tr>
-                        <td width="20%">Jenis Pembayaran</td>
-                        <td>Via Rekening / COD</td>
+                        <td width="20%">Metode Pembayaran</td>
+                        <td>{{ $pesanan->metode_p }}</td>
                       </tr>
                      
                   </table>
@@ -91,6 +91,9 @@
                 </p>
               </div> --}}
               <!-- /.col -->
+              @php
+                  $total = $item->pesanan->total_harga + $pesanan->kode_unik;
+              @endphp
               <div class="col-12">
                 <div class="table-responsive">
                   <table class="table">
@@ -99,8 +102,8 @@
                       <td>Rp. {{ number_format($item->pesanan->total_harga,0,'.','.') }}</td>
                     </tr>
                     <tr>
-                      <th>Pajak (11%)</th>
-                      <td>Rp. 0</td>
+                      <th>Kode Unik</th>
+                      <td>Rp. {{ number_format($pesanan->kode_unik,0,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Ongkir</th>
@@ -108,7 +111,7 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td><b> Rp. {{ number_format($item->pesanan->total_harga,0,'.','.') }}</b></td>
+                      <td><b> Rp. {{ number_format($total,0,'.','.') }}</b></td>
                     </tr>
                   </table>
                 </div>
@@ -127,9 +130,12 @@
                 </form>
                 {{-- <a href="{{ route('pesanan.detail-print') }}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
                 
-                <a type="button" class="btn btn-success float-right" style="margin: 5px;">
+                @if ($pesanan->status==1)
+                <a href="{{ route('pesanan.sudah-bayar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                   <i class="fas fa-money"></i> Sudah Bayar
-                </a>
+                </a>    
+                @endif
+                
 
                 <a href="{{ route('pesanan.index') }}" style="margin: 5px;" class="btn btn-warning float-right"><i class="far fa-back"></i> Kembali </a>
               </div>
