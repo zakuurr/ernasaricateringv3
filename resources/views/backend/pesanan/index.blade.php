@@ -32,13 +32,21 @@
               <td>{{ $item->total_harga }}</td>
               <td>{{ $item->kode_unik }}</td>
               <td>
-                @if ($item->status==1)
-                <span class="badge badge-danger">Belum Bayar</span>    
-                @else
-                <span class="badge badge-success">Sudah Bayar</span>    
-                @endif
-                
-              
+                @if($item->status == 1)
+                <span class="badge badge-danger"> Belum Bayar </span>
+                     @elseif ($item->status == 2)
+                     <span class="badge badge-success"> Sudah Bayar </span>
+                     @elseif ($item->status == 3)
+                     <span class="badge badge-warning"> Di Batalkan </span>
+                     @elseif ($item->status == 4)
+                     <span class="badge badge-primary"> Di Proses </span>
+                     @elseif ($item->status == 5)
+                     <span class="badge badge-info"> Di Antar </span>
+                     @elseif ($item->status == 6)
+                     <span class="badge badge-success"> Selesai </span>
+                     @endif
+
+
               </td>
               <td>
                 <center>

@@ -30,7 +30,7 @@
                       </tr>
                       <tr>
                         <td width="20%">No. Hp</td>
-                        <td>{{ $user->nohp }}</td> 
+                        <td>{{ $user->nohp }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Alamat</td>
@@ -40,7 +40,7 @@
                         <td width="20%">Metode Pembayaran</td>
                         <td>{{ $pesanan->metode_p }}</td>
                       </tr>
-                     
+
                   </table>
               <!-- /.col -->
             </div>
@@ -67,7 +67,7 @@
                         <td>Rp. {{ number_format($item->total_harga,0,'.','.') }}</td>
                     </tr>
                     @endforeach
-             
+
                   </tbody>
                 </table>
               </div>
@@ -129,13 +129,35 @@
                 <button type="submit" class="btn btn-default" rel="noopener" formtarget="_blank"><i class="fas fa-print"></i> Print</button>
                 </form>
                 {{-- <a href="{{ route('pesanan.detail-print') }}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
-                
+
                 @if ($pesanan->status==1)
                 <a href="{{ route('pesanan.sudah-bayar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                   <i class="fas fa-money"></i> Sudah Bayar
-                </a>    
+                </a>
+                @elseif ($pesanan->status == 2)
+                <a href="{{ route('pesanan.diproses', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
+                    <i class="fas fa-money"></i> Proses
+                  </a>
+                @elseif ($pesanan->status == 4)
+                <a href="{{ route('pesanan.diantar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
+                    <i class="fas fa-money"></i> Antar
+                  </a>
                 @endif
-                
+
+                {{-- @if($pesanan->status == 1)
+
+                     @elseif ($pesanan->status == 2)
+
+                     @elseif ($pesanan->status == 3)
+
+                     @elseif ($pesanan->status == 4)
+
+                     @elseif ($pesanan->status == 5)
+
+                     @elseif ($pesanan->status == 6)
+
+                     @endif --}}
+
 
                 <a href="{{ route('pesanan.index') }}" style="margin: 5px;" class="btn btn-warning float-right"><i class="far fa-back"></i> Kembali </a>
               </div>

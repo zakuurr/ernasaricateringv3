@@ -81,7 +81,29 @@ class PesananController extends Controller
         ]);
 
         session()->flash('success', 'Pesanan telah dibayar');
-        return redirect()->route('pesanan.index');
+        return redirect()->back();
+    }
+
+    public function diProses(Request $request, $id)
+    {
+        $pesanan = Pesanan::find($id);
+        $pesanan->update([
+            'status'    => 4
+        ]);
+
+        session()->flash('success', 'Pesanan di proses');
+        return redirect()->back();
+    }
+
+    public function diAntar(Request $request, $id)
+    {
+        $pesanan = Pesanan::find($id);
+        $pesanan->update([
+            'status'    => 5
+        ]);
+
+        session()->flash('success', 'Pesanan di di antar');
+        return redirect()->back();
     }
 
     /**
@@ -93,7 +115,7 @@ class PesananController extends Controller
     public function destroy($id)
     {
         $pesanan = Pesanan::find($id);
-      
+
         $pesanan->delete();
 
         session()->flash('success', 'Data berhasil dihapus');

@@ -10,6 +10,14 @@ class History extends Component
 {
 
     public $pesanans;
+
+    public function cancelOrder() {
+
+        $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status','!=',0)->first();
+        $pesanan->status = 3;
+
+        $pesanan->update();
+    }
     public function render()
     {
         if(Auth::User()){

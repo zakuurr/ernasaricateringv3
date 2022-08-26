@@ -53,11 +53,22 @@
                                                 @endforeach
                                         </td>
                                         <td>
+
                                            @if($pesanan->status == 1)
                                            <span class="badge badge-danger"> Belum Bayar </span>
-                                                @else
+                                                @elseif ($pesanan->status == 2)
                                                 <span class="badge badge-success"> Sudah Bayar </span>
+                                                @elseif ($pesanan->status == 3)
+                                                <span class="badge badge-warning"> Di Batalkan </span>
+                                                @elseif ($pesanan->status == 4)
+                                                <span class="badge badge-primary"> Di Proses </span>
+                                                @elseif ($pesanan->status == 5)
+                                                <span class="badge badge-info"> Di Antar </span>
+                                                @elseif ($pesanan->status == 6)
+                                                <span class="badge badge-success"> Selesai </span>
                                                 @endif
+
+                                                <button wire:click.prevent="cancelOrder" class="btn btn-warning btn-sm">Cancel Pesanan</button>
                                         </td>
                                         <td>
                                             {{$pesanan->metode_p}}</td>
