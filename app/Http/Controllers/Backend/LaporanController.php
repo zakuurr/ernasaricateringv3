@@ -43,20 +43,39 @@ class LaporanController extends Controller
 
             foreach ($pesanans as $key => $pesanan) {
 
-            $output.='<tr>'.
+            if ($pesanan->status==1) {
+                $output.='<tr>'.
 
-            '<td>'.$key + (1).'</td>'.
+                '<td>'.$key + (1).'</td>'.
+                
+                '<td>'.$pesanan->kode_pemesanan.'</td>'.
+
+                '<td>'.$pesanan->user->name.'</td>'.
+
+                '<td>'.$pesanan->total_harga.'</td>'.
+
+                '<td>'.$pesanan->kode_unik.'</td>'.
+                '<td><span class="badge badge-danger">Belum hayar</span></td>'.
+
+                '</tr>';
+
+            }else{
+                $output.='<tr>'.
+
+                '<td>'.$key + (1).'</td>'.
+                
+                '<td>'.$pesanan->kode_pemesanan.'</td>'.
+    
+                '<td>'.$pesanan->user->name.'</td>'.
+    
+                '<td>'.$pesanan->total_harga.'</td>'.
+    
+                '<td>'.$pesanan->kode_unik.'</td>'.
+                '<td><span class="badge badge-success">Sudah bayar</span></td>'.
+    
+                '</tr>';
+            }
             
-            '<td>'.$pesanan->kode_pemesanan.'</td>'.
-
-            '<td>'.$pesanan->user->name.'</td>'.
-
-            '<td>'.$pesanan->total_harga.'</td>'.
-
-            '<td>'.$pesanan->kode_unik.'</td>'.
-            '<td><span class="badge badge-danger">Belum hayar</span></td>'.
-
-            '</tr>';
 
             }
 
