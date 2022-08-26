@@ -8,7 +8,7 @@
             <p class="mb-4 text-white">Menerima antar makanan ke lokasi anda
                 untuk lokasi Cicalengka sekitarnya!</p>
             <p>
-              <a href="#" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Lihat Menu</a>
+              <a href="{{url('/list-menu')}}" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Lihat Menu</a>
             </p>
           </div>
         </div>
@@ -25,7 +25,7 @@
           </div>
           <div class="text">
             <h2 class="text-uppercase">Bebas Ongkir</h2>
-            <p>Free Ongkir ke seluruh pulau Jawa.</p>
+            <p>Free Ongkir ke daerah Cicalengka dan sekitarnya.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
