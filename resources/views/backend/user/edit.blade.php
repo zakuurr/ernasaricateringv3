@@ -42,11 +42,10 @@
 
                     <div class="form-group">
                         <label for="level">Pilih level</label>
-                        <select class="custom-select form-control-border" name="id_level" id="level">
+                        <select class="custom-select form-control-border" name="utype" id="utype">
                             <option>Pilih Level</option>
-                        @foreach ($level as $item)
-                            <option value="{{ $item->id }}" {{ $item->id == $user->id_level ? 'selected' : '' }}>{{ $item->level }}</option>
-                        @endforeach
+                            <option value="ADM" {{ $user->utype == "ADM" ? 'selected' : '' }}>Admin</option>
+                            <option value="USR" {{ $user->utype == "USR" ? 'selected' : '' }}>User</option>
                         </select>
                     </div>
 

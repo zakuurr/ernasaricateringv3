@@ -11,6 +11,7 @@
                 <div class="card-header">
                   <h3 class="card-title">Tambah Data User</h3>
                 </div>
+                <small><i><font color="red">*semua data harus terisi</font></i></small>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form method="POST" name="FormTambah" onsubmit="return Validation()" enctype="multipart/form-data"
@@ -41,11 +42,10 @@
 
                     <div class="form-group">
                         <label for="level">Pilih level</label>
-                        <select class="custom-select form-control-border" name="id_level" id="level">
-                            <option>Pilih Level</option>
-                        @foreach ($level as $item)
-                            <option value="{{ $item->id }}">{{ $item->level }}</option>
-                        @endforeach
+                        <select class="custom-select form-control-border" name="utype" id="utype">
+                          <option>Pilih Level</option>
+                          <option value="ADM">Admin</option>
+                          <option value="USR">User</option>
                         </select>
                     </div>
 

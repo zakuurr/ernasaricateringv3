@@ -54,7 +54,7 @@ class UserController extends Controller
             'email'       => $request['email'],
             'username'    => $request['username'],
             'password'    => bcrypt($request['password']),
-            'id_level'    => $request['id_level'],
+            'utype'       => $request['utype'],
             'foto'        => (int)$date . '.' . $filename->getClientOriginalExtension(),
 
         ]);
@@ -126,7 +126,7 @@ class UserController extends Controller
             'email'       => $request['email'],
             'username'    => $request['username'],
             'password'    => bcrypt($request['password']),
-            'id_level'    => $request['id_level'],
+            'utype'       => $request['utype'],
             'foto'        => $savefoto,
         ]);
 

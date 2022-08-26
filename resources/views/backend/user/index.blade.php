@@ -30,7 +30,7 @@
               {{-- <td><img src="{{ asset('storage/fotouser/'. $item->foto) }}" alt="" width="50%"></td> --}}
               <td>{{ $item->username }}</td>
               <td>{{ $item->email }}</td>
-              <td>{{ $item->level->level }}</td>
+              <td>{{ $item->utype }}</td>
               <td>
                 <center>
                   <a class="btn btn-info" href="{{ route('user.edit', $item->id) }}" ><i class="fa fa-pencil"></i></a>

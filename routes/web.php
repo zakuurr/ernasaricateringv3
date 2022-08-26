@@ -67,6 +67,7 @@ Route::prefix('pesanan')->group(function () {
     Route::get('/', [App\Http\Controllers\Backend\PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/detail/{id}', [App\Http\Controllers\Backend\PesananController::class, 'detail'])->name('pesanan.detail');
     Route::get('/detail-print', [App\Http\Controllers\Backend\PesananController::class, 'detailPrint'])->name('pesanan.detail-print');
+    Route::get('/sudah-bayar/{id}', [App\Http\Controllers\Backend\PesananController::class, 'sudahBayar'])->name('pesanan.sudah-bayar');
     Route::get('/destroy/{id}', [App\Http\Controllers\Backend\PesananController::class, 'destroy'])->name('pesanan.destroy');
 });
 
