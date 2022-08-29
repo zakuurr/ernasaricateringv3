@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('user_id')->unsigned();
+            // $table->bigInteger('order_id')->unsigned();
+            $table->enum('mode',['cod','transfer']);
+            $table->enum('status',['pending','approved','declined','refunded'])->default('pending');
             $table->timestamps();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->nullable();
+            $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade')->nullable();
         });
     }
 

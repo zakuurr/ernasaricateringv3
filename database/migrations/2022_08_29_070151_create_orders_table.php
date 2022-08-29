@@ -15,7 +15,20 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('user_id')->unsigned();
+            $table->string('subtotal')->nullable();
+            $table->string('tax')->nullable();
+            $table->string('total')->nullable();
+            $table->string('nama_lengkap')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('email')->nullable();
+            $table->text('alamat')->nullable();
+            $table->text('alamat2')->nullable();
+            $table->enum('status',['ordered','delivered','canceled'])->default('ordered');
+            $table->boolean('is_shipping_different')->default(false);
             $table->timestamps();
+
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->nullable();
         });
     }
 

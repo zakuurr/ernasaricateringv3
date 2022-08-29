@@ -3,7 +3,7 @@
 
 		<div class="container">
 			<div class="main-content-area">
-
+             @if(Cart::instance('cart')->count() > 0)
 				<div class="wrap-iten-in-cart">
                     @if(Session::has('success_message'))
                     <div class="alert alert-success">
@@ -11,10 +11,10 @@
 
                     </div>
                     @endif
-                    @if(Cart::count() > 0)
+                    {{-- @if(Cart::instance('cart')->count() > 0) --}}
 					<h3 class="box-title">Nama Menu</h3>
 					<ul class="products-cart">
-                        @foreach(Cart::content() as $item)
+                        @foreach(Cart::instance('cart')->content() as $item)
 						<li class="pr-cart-item">
 							<div class="product-image">
 								<figure><img src="{{asset('storage/fotomenu/'. $item->model->foto)}}" alt="" class="img-fluid"></figure>
@@ -40,9 +40,9 @@
 						</li>
                         @endforeach
 					</ul>
-                    @else
+                    {{-- @else
                     <p>Tidak ada pesanan</p>
-                    @endif
+                    @endif --}}
 				</div>
 
 				<div class="summary">
@@ -75,7 +75,7 @@
                         </b></p>
 					</div>
 					<div class="checkout-info">
-						<a class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Check out</a>
+						<a class="btn btn-checkout text-black" wire:click.prevent="checkout" style="background-color: #d49701; :color : black">Check out</a>
 						<a class="link-to-shop" href="{{route('list-menu')}}">Lanjutkan Belanja<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 					</div>
 					<div class="update-clear">
@@ -83,7 +83,11 @@
 						<a class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Update Shopping Cart</a>
 					</div>
 				</div>
-
+            @else
+            <div class="text-center" style="padding: 30px 0;">
+                    <h1> Keranjang Kosong</h1>
+            </div>
+            @endif
 			</div><!--end main content area-->
 		</div><!--end container-->
 

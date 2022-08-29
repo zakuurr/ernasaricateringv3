@@ -19,14 +19,14 @@ class Keranjang extends Component
 
     public function increaseQuantity($rowId) {
 
-        $menu = Cart::get($rowId);
+        $menu = Cart::instance('cart')->get($rowId);
         $qty = $menu->qty+1;
         Cart::update($rowId,$qty);
     }
 
     public function decreaseQuantity($rowId) {
 
-        $menu = Cart::get($rowId);
+        $menu = Cart::instance('cart')->get($rowId);
         $qty = $menu->qty-1;
         Cart::update($rowId,$qty);
     }
@@ -34,7 +34,7 @@ class Keranjang extends Component
     // protected $pesanan_details = [];
 
     public function destroy($rowId) {
-        Cart::remove($rowId);
+        Cart::instance('cart')->remove($rowId);
         session()->flash('success_message','Pesanan di Hapus');
 
     }
@@ -43,6 +43,17 @@ class Keranjang extends Component
         Cart::destroy();
         session()->flash('success_message','Pesanan di Hapus');
 
+    }
+
+    public function checkout() {
+        if(Auth::check())
+        {
+            dd('123');
+            return redirect()->route('checkout');
+        } else
+        {
+            return redirect()->route('login');
+        }
     }
     //     $pesanan_detail = PesananDetail::find($id);
     //     if(!empty($pesanan_detail)){

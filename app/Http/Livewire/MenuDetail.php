@@ -32,7 +32,7 @@ class MenuDetail extends Component
         if(!Auth::user()){
                     return redirect()->route('login');
                 }
-        Cart::add($menu_id,$menu_nama,$this->quantity,$menu_harga)->associate('App\Models\Backend\Menu');
+        Cart::instance('cart')->add($menu_id,$menu_nama,$this->quantity,$menu_harga)->associate('App\Models\Backend\Menu');
         session()->flash('success_message',"Menu Berhasil di Tambahkan");
         return redirect()->route('keranjang');
     }
