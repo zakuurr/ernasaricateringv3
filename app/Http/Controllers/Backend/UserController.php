@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Level;
 
 class UserController extends Controller
@@ -53,7 +54,7 @@ class UserController extends Controller
             'name'        => $request['nama'],
             'email'       => $request['email'],
             'username'    => $request['username'],
-            'password'    => bcrypt($request['password']),
+            'password'    => Hash::make($request['password']),
             'utype'       => $request['utype'],
             'foto'        => (int)$date . '.' . $filename->getClientOriginalExtension(),
 
@@ -125,7 +126,7 @@ class UserController extends Controller
             'name'        => $request['nama'],
             'email'       => $request['email'],
             'username'    => $request['username'],
-            'password'    => bcrypt($request['password']),
+            'password'    => Hash::make($request['password']),
             'utype'       => $request['utype'],
             'foto'        => $savefoto,
         ]);

@@ -35,8 +35,8 @@
                         <select class="custom-select form-control-border" required name="id_kategori" id="level">
                             <option>Pilih Kategori</option>
                             @foreach ($kategori as $item)
-                            <option value="{{$item->id}}">{{$item->kategori}}</option>
-    @endforeach
+                            <option value="{{$item->id}}" {{ $item->id == $menu->id_kategori ? 'selected' : '' }}>{{$item->kategori}}</option>
+                            @endforeach
                         </select>
                     </div>
 

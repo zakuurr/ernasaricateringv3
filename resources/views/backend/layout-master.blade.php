@@ -133,7 +133,12 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+          @if (isset(Auth::user()->foto))
           <img src="{{ asset('storage/fotouser/'. Auth::user()->foto) }}" class="rounded-circle" alt="User Image">
+          @else
+          <img src="{{ asset('frontend/images/userlogo.png')}}" class="rounded-circle" alt="User Image">
+          @endif
+
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -192,7 +197,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('kategori.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-cutlery"></i>
+              <i class="nav-icon fa fa-list"></i>
               <p>
                 Kategori Makanan
               </p>
