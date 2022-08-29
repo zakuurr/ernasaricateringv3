@@ -15,23 +15,32 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Kode Pesanan</th>
-            <th>Nama Pelanggan</th>
-            <th>Total Harga</th>
-            <th>Kode Unik</th>
+            <th>Order ID</th>
+            <th>Sub total</th>
+            <th>Total</th>
+            <th>Nama Lengkap</th>
+            <th>Email</th>
+            <th>No Hp</th>
+            <th>Alamat</th>
             <th>Status</th>
-            <th>Aksi</th>
+            <th>Order Date</th>
+            <th>Action</th>
           </tr>
           </thead>
           <tbody>
             @foreach ($pesanan as $key => $item)
             <tr>
               <td>{{ $key+1 }}</td>
-              <td>{{ $item->kode_pemesanan }}</td>
-              <td>{{ $item->user->name }}</td>
-              <td>{{ $item->total_harga }}</td>
-              <td>{{ $item->kode_unik }}</td>
-              <td>
+              <td>{{ $item->id }}</td>
+              <td>{{ $item->subtotal }}</td>
+              <td>{{ $item->total }}</td>
+              <td>{{ $item->nama_lengkap }}</td>
+              <td>{{ $item->email }}</td>
+              <td>{{ $item->nohp }}</td>
+              <td>{{ $item->alamat }}</td>
+              <td>{{ $item->status }}</td>
+              <td>{{ $item->created_at }}</td>
+              {{-- <td>
                 @if($item->status == 1)
                 <span class="badge badge-danger"> Belum Bayar </span>
                      @elseif ($item->status == 2)
@@ -47,7 +56,7 @@
                      @endif
 
 
-              </td>
+              </td> --}}
               <td>
                 <center>
                   <a class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>

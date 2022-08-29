@@ -3,7 +3,7 @@
 
 		<div class="container">
 			<div class="main-content-area">
-
+             @if(Cart::instance('cart')->count() > 0)
 				<div class="wrap-iten-in-cart">
                     @if(Session::has('success_message'))
                     <div class="alert alert-success">
@@ -11,10 +11,10 @@
 
                     </div>
                     @endif
-                    @if(Cart::count() > 0)
+                    {{-- @if(Cart::instance('cart')->count() > 0) --}}
 					<h3 class="box-title">Nama Menu</h3>
 					<ul class="products-cart">
-                        @foreach(Cart::content() as $item)
+                        @foreach(Cart::instance('cart')->content() as $item)
 						<li class="pr-cart-item">
 							<div class="product-image">
 								<figure><img src="{{asset('storage/fotomenu/'. $item->model->foto)}}" alt="" class="img-fluid"></figure>
@@ -40,50 +40,55 @@
 						</li>
                         @endforeach
 					</ul>
-                    @else
+                    {{-- @else
                     <p>Tidak ada pesanan</p>
-                    @endif
+                    @endif --}}
 				</div>
 
 				<div class="summary">
 					<div class="order-summary">
 						<h4 class="title-box">RINGKASAN PESANAN</h4>
                         <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label>
-                        <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
+                        {{-- <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
                                 <option value="0" selected="selected">Pilih Metode Pembayaran</option>
                                 <option value="Transfer">Transfer</option>
                                 <option value="COD">COD</option>
-                        </select>
+                        </select> --}}
                         <br>
-                        @if($pembayaran === 'COD')
+                        {{-- @if($pembayaran === 'COD')
 						<label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pengiriman</label>
                         <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
                                 <option value="0" selected="selected">Pilih Pengiriman</option>
                                 <option value="10000">Regular Pengiriman (Rp.10.000)</option>
                         </select>
-                        @endif
-                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">Rp. {{ Cart::subtotal(0,'.','.')}}</b></p>
-						@if($shipping and $pembayaran === 'COD')
+                        @endif --}}
+                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">Rp. {{ Cart::instance('cart')->subtotal(0,'.','.')}}</b></p>
+                        {{-- <p class="summary-info"><span class="title">Kode Unik</span><b class="index">Rp. {{ $kode_unik}}</b></p> --}}
+						{{-- @if($shipping and $pembayaran === 'COD')
                         <p class="summary-info"><span class="title">Shipping</span><b class="index">Rp. {{number_format($shipping,0,'.','.')}}</b></p>
-						@endif
+						@endif --}}
                         <p class="summary-info total-info "><span class="title">Total</span><b class="index">
-                            @if($shipping and $pembayaran === 'COD')
+                            {{-- @if($shipping and $pembayaran === 'COD')
                             Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}
-                            @else
-                            Rp. {{ Cart::total(0,'.','.') }}
-                            @endif
+                            @else --}}
+                            Rp. {{ Cart::instance('cart')->total(0,'.','.') }}
+                            {{-- @endif --}}
                         </b></p>
 					</div>
 					<div class="checkout-info">
-						<a class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Check out</a>
+						<a class="btn btn-checkout text-black" wire:click.prevent="checkout" style="background-color: #d49701; :color : black">Check out</a>
 						<a class="link-to-shop" href="{{route('list-menu')}}">Lanjutkan Belanja<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 					</div>
 					<div class="update-clear">
 						<a  wire:click.prevent="destroyAll()" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Kosongkan Keranjang</a>
-						<a class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Update Shopping Cart</a>
+						{{-- \ --}}
 					</div>
 				</div>
-
+            @else
+            <div class="text-center" style="padding: 30px 0;">
+                    <h1> Keranjang Kosong</h1>
+            </div>
+            @endif
 			</div><!--end main content area-->
 		</div><!--end container-->
 

@@ -17,28 +17,33 @@
             <div class="row invoice-info">
                 <table class="table table">
                       <tr>
-                        <td width="20%">Kode Unik Pesanan</td>
-                        <td>{{ $pesanan->kode_unik }}</td>
+                        <td width="20%">ID ORDER</td>
+                        <td>{{ $pesanan->id }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Nama Pelanggan</td>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $pesanan->nama_lengkap }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Tanggal Pemesanan</td>
-                        <td>{{ $tanggal }}</td>
+                        <td>{{ $pesanan->created_at }}</td>
                       </tr>
                       <tr>
                         <td width="20%">No. Hp</td>
-                        <td>{{ $user->nohp }}</td>
+                        <td>{{ $pesanan->nohp }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Alamat</td>
-                        <td>{{ $user->alamat }}</td>
+                        <td>{{ $pesanan->alamat }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Metode Pembayaran</td>
-                        <td>{{ $pesanan->metode_p }}</td>
+                        <td>{{ $pesanan->transaction->mode }}</td>
+                      </tr>
+
+                      <tr>
+                        <td width="20%">Catatan Pesanan</td>
+                        <td>{{ $pesanan->catatan }}</td>
                       </tr>
 
                   </table>
@@ -59,12 +64,12 @@
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($detailPesan as $item)
+                    @foreach ($pesanan->orderItems as $item)
                     <tr>
-                        <td>{{ $item->jumlah_pesanan }}</td>
+                        <td>{{ $item->quantity }}</td>
                         <td><img src="{{ asset('storage/fotomenu/'. $item->menu->foto) }}" width="50%" ></td>
                         <td>{{ $item->menu->nama_menu }}</td>
-                        <td>Rp. {{ number_format($item->total_harga,0,'.','.') }}</td>
+                        <td>Rp. {{ number_format($item->price,0,'.','.') }}</td>
                     </tr>
                     @endforeach
 
@@ -91,27 +96,23 @@
                 </p>
               </div> --}}
               <!-- /.col -->
-              @php
+              {{-- @php
                   $total = $item->pesanan->total_harga + $pesanan->kode_unik;
-              @endphp
+              @endphp --}}
               <div class="col-12">
                 <div class="table-responsive">
                   <table class="table">
                     <tr>
                       <th style="width:72%">Subtotal</th>
-                      <td>Rp. {{ number_format($item->pesanan->total_harga,0,'.','.') }}</td>
-                    </tr>
-                    <tr>
-                      <th>Kode Unik</th>
-                      <td>Rp. {{ number_format($pesanan->kode_unik,0,'.','.') }}</td>
+                      <td>Rp. {{ number_format((float)$pesanan->subtotal,3,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Ongkir</th>
-                      <td>Rp. 0</td>
+                      <td>Rp. 10.000</td>
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td><b> Rp. {{ number_format($total,0,'.','.') }}</b></td>
+                      <td><b> Rp. {{ number_format($pesanan->total,0,'.','.') }}</b></td>
                     </tr>
                   </table>
                 </div>
@@ -125,12 +126,12 @@
               <div class="col-12">
                 <form action="{{ route('pesanan.detail-print') }}">
                     @csrf
-                    <input type="hidden" value="{{ $pesanan->id }}" name="id_pesanan">
+                    <input type="hidden" value="{{ $pesanan->id }}" name="id">
                 <button type="submit" class="btn btn-default" rel="noopener" formtarget="_blank"><i class="fas fa-print"></i> Print</button>
                 </form>
                 {{-- <a href="{{ route('pesanan.detail-print') }}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
 
-                @if ($pesanan->status==1)
+                {{-- @if ($pesanan->status==1)
                 <a href="{{ route('pesanan.sudah-bayar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                   <i class="fas fa-money"></i> Sudah Bayar
                 </a>
@@ -142,7 +143,7 @@
                 <a href="{{ route('pesanan.diantar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                     <i class="fas fa-money"></i> Antar
                   </a>
-                @endif
+                @endif --}}
 
                 {{-- @if($pesanan->status == 1)
 

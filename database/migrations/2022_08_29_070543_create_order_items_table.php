@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('menu_id')->unsigned();
+            // $table->bigInteger('order_id')->unsigned();
+            $table->string('price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
+            $table->foreignId('menu_id')->references('id')->on('menu')->onDelete('cascade')->nullable();
+            $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade')->nullable();
         });
     }
 
