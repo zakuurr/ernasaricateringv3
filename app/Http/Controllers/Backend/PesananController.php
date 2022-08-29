@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
@@ -18,7 +19,7 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanan = Pesanan::all();
+        $pesanan = Order::orderBy('created_at','DESC')->get();
 
         return view('backend/pesanan/index', compact('pesanan'));
     }
@@ -30,7 +31,7 @@ class PesananController extends Controller
      */
     public function detailPrint(Request $request)
     {
-        $pesanan = Pesanan::find($request->id_pesanan);
+        $pesanan = Order::find($request->id);
         $user = User::find($pesanan->user_id);
         $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
         $tanggal = Carbon::parse($pesanan->created_at)->translatedFormat('d F Y');
@@ -57,13 +58,13 @@ class PesananController extends Controller
      */
     public function detail($id)
     {
-        $pesanan = Pesanan::find($id);
+        $pesanan = Order::find($id);
         $user = User::find($pesanan->user_id);
-        $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
+        // $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
         $tanggal = Carbon::parse($pesanan->created_at)->translatedFormat('d F Y');
 
 
-        return view('backend/pesanan/detail',compact('pesanan','user','detailPesan','tanggal'));
+        return view('backend/pesanan/detail',compact('pesanan','user','tanggal'));
     }
 
     /**
@@ -73,38 +74,38 @@ class PesananController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function sudahBayar(Request $request, $id)
-    {
-        $pesanan = Pesanan::find($id);
-        $pesanan->update([
-            'status'    => 2
-        ]);
+    // public function sudahBayar(Request $request, $id)
+    // {
+    //     $pesanan = Pesanan::find($id);
+    //     $pesanan->update([
+    //         'status'    => 2
+    //     ]);
 
-        session()->flash('success', 'Pesanan telah dibayar');
-        return redirect()->back();
-    }
+    //     session()->flash('success', 'Pesanan telah dibayar');
+    //     return redirect()->back();
+    // }
 
-    public function diProses(Request $request, $id)
-    {
-        $pesanan = Pesanan::find($id);
-        $pesanan->update([
-            'status'    => 4
-        ]);
+    // public function diProses(Request $request, $id)
+    // {
+    //     $pesanan = Pesanan::find($id);
+    //     $pesanan->update([
+    //         'status'    => 4
+    //     ]);
 
-        session()->flash('success', 'Pesanan di proses');
-        return redirect()->back();
-    }
+    //     session()->flash('success', 'Pesanan di proses');
+    //     return redirect()->back();
+    // }
 
-    public function diAntar(Request $request, $id)
-    {
-        $pesanan = Pesanan::find($id);
-        $pesanan->update([
-            'status'    => 5
-        ]);
+    // public function diAntar(Request $request, $id)
+    // {
+    //     $pesanan = Pesanan::find($id);
+    //     $pesanan->update([
+    //         'status'    => 5
+    //     ]);
 
-        session()->flash('success', 'Pesanan di di antar');
-        return redirect()->back();
-    }
+    //     session()->flash('success', 'Pesanan di di antar');
+    //     return redirect()->back();
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -114,7 +115,7 @@ class PesananController extends Controller
      */
     public function destroy($id)
     {
-        $pesanan = Pesanan::find($id);
+        $pesanan = Order::find($id);
 
         $pesanan->delete();
 

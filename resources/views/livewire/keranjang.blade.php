@@ -48,7 +48,7 @@
 				<div class="summary">
 					<div class="order-summary">
 						<h4 class="title-box">RINGKASAN PESANAN</h4>
-                        {{-- <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label> --}}
+                        <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label>
                         {{-- <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
                                 <option value="0" selected="selected">Pilih Metode Pembayaran</option>
                                 <option value="Transfer">Transfer</option>
@@ -81,7 +81,7 @@
 					</div>
 					<div class="update-clear">
 						<a  wire:click.prevent="destroyAll()" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Kosongkan Keranjang</a>
-						<a class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Update Shopping Cart</a>
+						{{-- \ --}}
 					</div>
 				</div>
             @else

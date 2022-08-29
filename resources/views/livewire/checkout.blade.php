@@ -41,15 +41,21 @@
 
 						</div>
 
-                        @if(Session::has('checkout'))
-						<p class="summary-info grand-total"><span>Grand Total</span>
-                            @if($shipping and $pembayaran === 'COD')
-                            <span class="grand-total-price">Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}</span></p>
-                            @else
-                            <span class="grand-total-price">Rp.{{number_format((float)Session::get('checkout')['total'],3,'.','.')}}</span></p>
+
+
+                        <p class="summary-info grand-total"><span>Catatan Pesanan</span>
+
+                            <textarea wire:model="catatan" id="" class="form-control"></textarea> </p>
+
+                            @if(Session::has('checkout'))
+                            <p class="summary-info grand-total"><span>Grand Total</span>
+                                @if($shipping and $pembayaran === 'COD')
+                                <span class="grand-total-price">Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}</span></p>
+                                @else
+                                <span class="grand-total-price">Rp.{{number_format((float)Session::get('checkout')['total'],3,'.','.')}}</span></p>
+                                @endif
                             @endif
-                        @endif
-						<button type="submit" class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Place order now</button>
+                            <button type="submit" class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Lakukan Pesanan Sekarang</button>
 					</div>
                     @if($pembayaran === 'COD')
 					<div class="summary-item shipping-method">

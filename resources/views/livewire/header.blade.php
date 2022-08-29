@@ -41,8 +41,8 @@
                       </a>
                     </li>
                     <li>
-                        <a href="{{ route('history')}}" class="site-cart">
-                          History
+                        <a href="{{ route('orders')}}" class="site-cart">
+                          Pesanan Saya
                         </a>
 
 

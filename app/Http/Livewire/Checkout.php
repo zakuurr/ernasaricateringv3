@@ -21,6 +21,7 @@ class Checkout extends Component
     public $kode_unik;
 
     public $cod;
+    public $catatan;
     public $tf;
     public $nama_lengkap;
     public $email;
@@ -46,6 +47,7 @@ public function placeOrder() {
             'nohp' => 'required',
             'alamat' => 'required',
             'pembayaran' => 'required',
+
         ]);
 
 if($this->shipping)
@@ -62,6 +64,7 @@ if($this->shipping)
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
     $order->status = 'ordered';
+    $order->catatan = $this->catatan;
     $order->save();
 } else {
     $order = new Order();
@@ -75,6 +78,7 @@ if($this->shipping)
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
     $order->status = 'ordered';
+    $order->catatan = $this->catatan;
     $order->save();
 }
 
