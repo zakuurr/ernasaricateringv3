@@ -16,6 +16,7 @@ class Keranjang extends Component
     public $pembayaran;
     public $totalCartWithoutTax;
     public $totalWithTax;
+    public $kode_unik;
 
     public function increaseQuantity($rowId) {
 
@@ -40,7 +41,7 @@ class Keranjang extends Component
     }
 
     public function destroyAll() {
-        Cart::destroy();
+        Cart::instance('cart')->destroy();
         session()->flash('success_message','Pesanan di Hapus');
 
     }
@@ -48,12 +49,37 @@ class Keranjang extends Component
     public function checkout() {
         if(Auth::check())
         {
-            dd('123');
+
             return redirect()->route('checkout');
         } else
         {
             return redirect()->route('login');
         }
+    }
+
+    public function setAmountForCheckout() {
+
+        if(!Cart::instance('cart')->count() > 0)
+        {
+            session()->forget('checkout');
+            return;
+        }
+    // if($this->shipping)
+    // {
+    //     session()->put('checkout',[
+    //         'discount' => 0,
+    //         'subtotal' => Cart::instance('cart')->subtotal(),
+    //         'tax' => 0,
+    //         'total' => $this->totalCartWithoutTax
+    //     ]);
+    // } else{
+        session()->put('checkout',[
+            'discount' => 0,
+            'subtotal' => Cart::instance('cart')->subtotal(),
+            'tax' => 0,
+            'total' => Cart::instance('cart')->total()
+        ]);
+    // }
     }
     //     $pesanan_detail = PesananDetail::find($id);
     //     if(!empty($pesanan_detail)){
@@ -76,14 +102,15 @@ class Keranjang extends Component
     //     session()->flash('message','Pesanan di Hapus');
     public function render()
     {
-        $cartItems = Cart::content()->map(function (CartItem $items){
+        $cartItems = Cart::instance('cart')->content()->map(function (CartItem $items){
             return (object)[
                 'total' => ($items->qty * $items->price),
             ];
         });
 
+        $this->kode_unik = mt_rand(99,100);
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
-
+$this->setAmountForCheckout();
         return view('livewire.keranjang',compact('cartItems'))->layout('layouts.base');
     }
 }

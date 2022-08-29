@@ -25,6 +25,8 @@ Route::get('/info-loker/{id}', \App\Http\Livewire\LokerDetail::class)->name('lok
 Route::get('/kontak', \App\Http\Livewire\Kontak::class)->name('kontak');
 Route::get('/menu-kategori/{id_kategori}', \App\Http\Livewire\Category::class)->name('menu.kategori');
 
+Route::get('/thankyou', \App\Http\Livewire\ThankyouComponent::class)->name('thankyou');
+
 //backend
 Route::get('/backend-page', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');
 

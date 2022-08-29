@@ -48,30 +48,31 @@
 				<div class="summary">
 					<div class="order-summary">
 						<h4 class="title-box">RINGKASAN PESANAN</h4>
-                        <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label>
-                        <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
+                        {{-- <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label> --}}
+                        {{-- <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
                                 <option value="0" selected="selected">Pilih Metode Pembayaran</option>
                                 <option value="Transfer">Transfer</option>
                                 <option value="COD">COD</option>
-                        </select>
+                        </select> --}}
                         <br>
-                        @if($pembayaran === 'COD')
+                        {{-- @if($pembayaran === 'COD')
 						<label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pengiriman</label>
                         <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
                                 <option value="0" selected="selected">Pilih Pengiriman</option>
                                 <option value="10000">Regular Pengiriman (Rp.10.000)</option>
                         </select>
-                        @endif
-                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">Rp. {{ Cart::subtotal(0,'.','.')}}</b></p>
-						@if($shipping and $pembayaran === 'COD')
+                        @endif --}}
+                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">Rp. {{ Cart::instance('cart')->subtotal(0,'.','.')}}</b></p>
+                        {{-- <p class="summary-info"><span class="title">Kode Unik</span><b class="index">Rp. {{ $kode_unik}}</b></p> --}}
+						{{-- @if($shipping and $pembayaran === 'COD')
                         <p class="summary-info"><span class="title">Shipping</span><b class="index">Rp. {{number_format($shipping,0,'.','.')}}</b></p>
-						@endif
+						@endif --}}
                         <p class="summary-info total-info "><span class="title">Total</span><b class="index">
-                            @if($shipping and $pembayaran === 'COD')
+                            {{-- @if($shipping and $pembayaran === 'COD')
                             Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}
-                            @else
-                            Rp. {{ Cart::total(0,'.','.') }}
-                            @endif
+                            @else --}}
+                            Rp. {{ Cart::instance('cart')->total(0,'.','.') }}
+                            {{-- @endif --}}
                         </b></p>
 					</div>
 					<div class="checkout-info">
