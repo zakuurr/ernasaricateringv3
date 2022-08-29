@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Backend\Kategori;
 use App\Models\Backend\Menu as BackendMenu;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -28,7 +29,7 @@ class Menu extends Component
 
         return view('livewire.menu',[
             'menus' => BackendMenu::where('nama_menu','LIKE','%'.$this->search.'%')->paginate(6),
-            'menus2' => BackendMenu::where('id_kategori',3)->paginate(3),
+            'menus2' => BackendMenu::inRandomOrder()->limit(3)->get(),
             'kategoris' => Kategori::all()
         ])->layout('layouts.base');
     }

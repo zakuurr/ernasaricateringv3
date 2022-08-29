@@ -68,8 +68,11 @@
                                                 <span class="badge badge-success"> Selesai </span>
                                                 @endif
 
+                                                @if ($pesanan->status == 1)
+
                                                 <button wire:click.prevent="cancelOrder" class="btn btn-warning btn-sm">Cancel Pesanan</button>
-                                        </td>
+                                                @endif
+                                            </td>
                                         <td>
                                             {{$pesanan->metode_p}}</td>
                                         </td>

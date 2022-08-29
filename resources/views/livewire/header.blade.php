@@ -35,8 +35,8 @@
                     <li>
                       <a href="{{ route('keranjang')}}" class="site-cart">
                         <span class="icon icon-shopping_cart"></span>
-                        @if($jumlah_pesanan !== 0)
-                        <span class="count">{{$jumlah_pesanan}}</span>
+                        @if(Cart::count() > 0)
+                        <span class="count">{{Cart::count()}}</span>
                         @endif
                       </a>
                     </li>
