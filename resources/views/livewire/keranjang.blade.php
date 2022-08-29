@@ -1,124 +1,91 @@
 <div>
-    <div class="site-section">
-        <div class="container">
-          <div class="row mb-5">
-            <div class="row">
-                <div class="col-md-12">
-                    @if(session()->has('message'))
-                    <div class="alert alert-danger">
-                        {{session('message')}}
+    <main id="main" class="main-site">
+
+		<div class="container">
+			<div class="main-content-area">
+
+				<div class="wrap-iten-in-cart">
+                    @if(Session::has('success_message'))
+                    <div class="alert alert-success">
+                        <strong>Success</strong> {{Session::get('success_message')}}
+
                     </div>
                     @endif
-                </div>
-            </div>
-            <form class="col-md-12" method="post">
-              <div class="site-blocks-table">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th class="product-thumbnail">Gambar</th>
-                      <th class="product-name">Keterangan</th>
-                      <th class="product-quantity">Jumlah</th>
-                      <th class="product-total">Harga</th>
-                      <th class="product-total">Total Harga</th>
-                      <th class="product-remove">Hapus</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $no = 1;
-                    $total = 0;
-                    ?>
-                        @forelse ($pesanan_details as $pesanan_detail)
+                    @if(Cart::count() > 0)
+					<h3 class="box-title">Nama Menu</h3>
+					<ul class="products-cart">
+                        @foreach(Cart::content() as $item)
+						<li class="pr-cart-item">
+							<div class="product-image">
+								<figure><img src="{{asset('storage/fotomenu/'. $item->model->foto)}}" alt="" class="img-fluid"></figure>
+							</div>
+							<div class="product-name">
+								<a class="link-to-product" href="#">{{$item->model->nama_menu}}</a>
+							</div>
+							<div class="price-field produtc-price"><p class="price">Rp. {{number_format($item->model->harga,0,'.','.')}}</p></div>
+							<div class="quantity">
+								<div class="quantity-input">
+									<input type="text" name="product-quatity" value="{{$item->qty}}" data-max="120" pattern="[0-9]*" >
+									<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
+									<a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
+								</div>
+							</div>
+							<div class="price-field sub-total"><p class="price">Rp. {{number_format($item->subtotal,0,'.','.')}}</p></div>
+							<div class="delete">
+								<a href="#" class="btn btn-delete" title="" wire:click.prevent="destroy('{{$item->rowId}}')">
+									<span>Hapus</span>
+									<i class="fa fa-times-circle" aria-hidden="true"></i>
+								</a>
+							</div>
+						</li>
+                        @endforeach
+					</ul>
+                    @else
+                    <p>Tidak ada pesanan</p>
+                    @endif
+				</div>
 
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td class="product-thumbnail">
-                                <img src="{{ asset('storage/fotomenu/'. $pesanan_detail->menu->foto) }}" alt="Image" class="img-fluid">
-                              </td>
-                              <td class="product-name">
-                                <h2 class="h5 text-black">{{$pesanan_detail->menu->nama_menu}}</h2>
-                              </td>
-                              <td class="product-name">
-                                <h2 class="h5 text-black">{{$pesanan_detail->jumlah_pesanan}}</h2>
-                              </td>
-                              <td>Rp. {{number_format($pesanan_detail->menu->harga,0,'.','.')}}</td>
+				<div class="summary">
+					<div class="order-summary">
+						<h4 class="title-box">RINGKASAN PESANAN</h4>
+                        <label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pembayaran</label>
+                        <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="pembayaran" id="">
+                                <option value="0" selected="selected">Pilih Metode Pembayaran</option>
+                                <option value="Transfer">Transfer</option>
+                                <option value="COD">COD</option>
+                        </select>
+                        <br>
+                        @if($pembayaran === 'COD')
+						<label for="" class="summary-info inline-block mb-3 text-sm uppercase font-medium">Metode Pengiriman</label>
+                        <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
+                                <option value="0" selected="selected">Pilih Pengiriman</option>
+                                <option value="10000">Regular Pengiriman (Rp.10.000)</option>
+                        </select>
+                        @endif
+                        <p class="summary-info"><span class="title">Subtotal</span><b class="index">Rp. {{ Cart::subtotal(0,'.','.')}}</b></p>
+						@if($shipping and $pembayaran === 'COD')
+                        <p class="summary-info"><span class="title">Shipping</span><b class="index">Rp. {{number_format($shipping,0,'.','.')}}</b></p>
+						@endif
+                        <p class="summary-info total-info "><span class="title">Total</span><b class="index">
+                            @if($shipping and $pembayaran === 'COD')
+                            Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}
+                            @else
+                            Rp. {{ Cart::total(0,'.','.') }}
+                            @endif
+                        </b></p>
+					</div>
+					<div class="checkout-info">
+						<a class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Check out</a>
+						<a class="link-to-shop" href="{{route('list-menu')}}">Lanjutkan Belanja<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+					</div>
+					<div class="update-clear">
+						<a  wire:click.prevent="destroyAll()" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Kosongkan Keranjang</a>
+						<a class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Update Shopping Cart</a>
+					</div>
+				</div>
 
-                              <td><strong> Rp. {{number_format($pesanan_detail->total_harga,0,'.','.')}} </strong></td>
-                              <td><i class="fa fa-trash text-danger" wire:click="destroy({{$pesanan_detail->id}})"></i></td>
-                            </tr>
+			</div><!--end main content area-->
+		</div><!--end container-->
 
-
-                        @empty
-                        <tr>
-                            <td colspan="7">Data Kosong</td>
-                        </tr>
-                        @endforelse
-                  </tbody>
-                </table>
-              </div>
-            </form>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="row mb-5">
-
-                <div class="col-md-6">
-                  <a  href="{{ url('/list-menu')}}" class="btn btn-sm btn-block text-black" style="background-color: #d49701; :color : black">Lanjutkan Belanja</a>
-                </div>
-              </div>
-
-            </div>
-            @if(!empty($pesanan))
-            <div class="col-md-6 pl-5">
-              <div class="row justify-content-end">
-                <div class="col-md-7">
-                  <div class="row">
-                    <div class="col-md-12 text-right border-bottom mb-5">
-                      <h3 class="text-black h4 text-uppercase">Total Pesanan</h3>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <span class="text-black">Total Harga</span>
-                    </div>
-                    <div class="col-md-6 text-right">
-                      <strong class="text-black">Rp. {{number_format($pesanan->total_harga,0,'.','.')}}</strong>
-                    </div>
-
-
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <span class="text-black">Kode Unik</span>
-                    </div>
-                    <div class="col-md-6 text-right">
-                      <strong class="text-black">Rp. {{ number_format($pesanan->kode_unik,0,'.','.')}}</strong>
-                    </div>
-
-
-                  </div>
-                  <div class="row mb-5">
-                    <div class="col-md-6">
-                      <span class="text-black">Total Bayar</span>
-                    </div>
-                    <div class="col-md-6 text-right">
-                      <strong class="text-black">Rp. {{number_format($pesanan->total_harga+$pesanan->kode_unik,0,'.','.')}}</strong>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <a href="{{ route('checkout')}}" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Checkout</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endif
-          </div>
-        </div>
-      </div>
+	</main>
 </div>

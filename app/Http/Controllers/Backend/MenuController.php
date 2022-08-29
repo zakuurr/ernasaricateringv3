@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Kategori;
 use Illuminate\Http\Request;
 use App\Models\Backend\Menu;
 
@@ -16,8 +17,9 @@ class MenuController extends Controller
     public function index()
     {
         $menu = Menu::all();
+        $kategori = Kategori::all();
 
-        return view('backend/menu/index', compact('menu'));
+        return view('backend/menu/index', compact('menu','kategori'));
     }
 
     /**
@@ -26,8 +28,8 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('backend/menu/create');
+    {   $kategori = Kategori::all();
+        return view('backend/menu/create',compact('kategori'));
     }
 
     /**
@@ -44,13 +46,16 @@ class MenuController extends Controller
             $filename    = $request->file('foto');
             $filename->move($destination, (int)$date . '.' . $filename->getClientOriginalExtension());
         }
-       
-       
+
+
         $menu = Menu::create([
             'nama_menu'   => $request['nama_menu'],
             'harga'       => $request['harga'],
-            'tipe'        => $request['tipe'],
+            'slug'       => $request['slug'],
+            'id_kategori'        => $request['id_kategori'],
             'deskripsi'   => $request['deskripsi'],
+            'stock_status'   => $request['stock_status'],
+            'stock'   => $request['stock'],
             'foto'        => (int)$date . '.' . $filename->getClientOriginalExtension(),
 
         ]);
@@ -78,8 +83,9 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
+        $kategori = Kategori::all();
         $menu = Menu::find($id);
-        return view('backend/menu/edit', compact('menu'));
+        return view('backend/menu/edit', compact('menu','kategori'));
     }
 
     /**
@@ -115,7 +121,10 @@ class MenuController extends Controller
         $menu->update([
             'nama_menu'   => $request['nama_menu'],
             'harga'       => $request['harga'],
-            'tipe'        => $request['tipe'],
+            'stock_status'       => $request['stock_status'],
+            'id_kategori'        => $request['id_kategori'],
+            'stock'        => $request['stock'],
+            'slug'        => $request['slug'],
             'deskripsi'   => $request['deskripsi'],
             'foto'        => $savefoto,
         ]);

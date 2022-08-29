@@ -16,11 +16,15 @@ return new class extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string('nama_menu');
+            $table->string('slug')->unique();
             $table->string('harga');
-            $table->string('tipe');
+            $table->decimal('harga_diskon')->nullable();
+            $table->enum('stock_status',['instock','outofstock']);
+            $table->integer('stock')->default(10);
+            $table->boolean('favorit')->default(false);
+            $table->unsignedInteger('quantity')->default(10);
             $table->string('deskripsi');
-            $table->string('foto');
-            $table->boolean('is_ready')->default(true);
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

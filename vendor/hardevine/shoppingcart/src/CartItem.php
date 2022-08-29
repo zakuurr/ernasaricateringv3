@@ -277,7 +277,7 @@ class CartItem implements Arrayable, Jsonable
         }
 
         if ($attribute === 'priceTax') {
-            return number_format(($this->price + $this->tax), 2, '.', '');
+            return number_format(($this->price), 2, '.', '');
         }
 
         if ($attribute === 'subtotal') {
@@ -289,7 +289,7 @@ class CartItem implements Arrayable, Jsonable
         }
 
         if ($attribute === 'tax') {
-            return number_format(($this->price * ($this->taxRate / 500)), 2, '.', '');
+            return number_format(($this->price * ($this->taxRate / 1000)), 2, '.', '');
         }
 
         if ($attribute === 'taxTotal') {

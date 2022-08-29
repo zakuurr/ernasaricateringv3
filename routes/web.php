@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', \App\Http\Livewire\Homepage::class)->name('home');
 Route::get('/list-menu', \App\Http\Livewire\Menu::class)->name('list-menu');
 Route::get('/about', \App\Http\Livewire\About::class);
-Route::get('/list-menu/{id}', \App\Http\Livewire\MenuDetail::class)->name('menu.detail');
+Route::get('/list-menu/{slug}', \App\Http\Livewire\MenuDetail::class)->name('menu.detail');
 Route::get('/keranjang', \App\Http\Livewire\Keranjang::class)->name('keranjang');
 Route::get('/checkout', \App\Http\Livewire\Checkout::class)->name('checkout');
 Route::get('/history', \App\Http\Livewire\History::class)->name('history');
@@ -57,6 +57,15 @@ Route::prefix('menu')->group(function () {
     Route::get('/edit/{id}', [App\Http\Controllers\Backend\MenuController::class, 'edit'])->name('menu.edit');
     Route::post('/update/{id}', [App\Http\Controllers\Backend\MenuController::class, 'update'])->name('menu.update');
     Route::get('/destroy/{id}', [App\Http\Controllers\Backend\MenuController::class, 'destroy'])->name('menu.destroy');
+});
+
+Route::prefix('kategori')->group(function () {
+    Route::get('/', [App\Http\Controllers\Backend\KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/create', [App\Http\Controllers\Backend\KategoriController::class, 'create'])->name('kategori.create');
+    Route::post('/store', [App\Http\Controllers\Backend\KategoriController::class, 'store'])->name('kategori.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\Backend\KategoriController::class, 'edit'])->name('kategori.edit');
+    Route::post('/update/{id}', [App\Http\Controllers\Backend\KategoriController::class, 'update'])->name('kategori.update');
+    Route::get('/destroy/{id}', [App\Http\Controllers\Backend\KategoriController::class, 'destroy'])->name('kategori.destroy');
 });
 
 

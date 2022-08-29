@@ -25,17 +25,18 @@
                       <label for="harga">Harga</label>
                       <input type="number" minlength="0" class="form-control" required value="{{ $menu->harga }}" id="harga" name="harga" placeholder="Masukan harga">
                     </div>
-                  
                     <div class="form-group">
-                        <label for="level">Pilih tipe</label>
-                        <select class="custom-select form-control-border" required name="tipe" id="level">
-                            <option>Pilih tipe</option>
-                            <option value="Paket" {{ $menu->tipe == 'Paket' ? 'selected' : '' }}>Paket</option>
-                            <option value="Satuan" {{ $menu->tipe == 'Satuan' ? 'selected' : '' }}>Satuan</option>
-                            <option value="Menu Utama" {{ $menu->tipe == 'Menu Utama' ? 'selected' : '' }}>Menu Utama</option>
-                            <option value="Diskon" {{ $menu->tipe == 'Diskon' ? 'selected' : '' }}>Diskon</option>
-                            <option value="Desert" {{ $menu->tipe == 'Desert' ? 'selected' : '' }}>Desert</option>
-                            <option value="Minuman" {{ $menu->tipe == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+                        <label for="slug">Slug</label>
+                        <input type="text" class="form-control" value="{{ $menu->slug }}" required id="slug" name="slug" placeholder="Masukan slug">
+                      </div>
+
+                    <div class="form-group">
+                        <label for="level">Pilih Kategori</label>
+                        <select class="custom-select form-control-border" required name="id_kategori" id="level">
+                            <option>Pilih Kategori</option>
+                            @foreach ($kategori as $item)
+                            <option value="{{$item->id}}">{{$item->kategori}}</option>
+    @endforeach
                         </select>
                     </div>
 
@@ -48,11 +49,26 @@
                         <label for="password">Foto Makanan</label>
                         <input type="file" name="foto" id="foto" class="form-control input-md">
                     </div>
-                        
+
+                    <div class="form-group">
+                        <label for="level">Stock Status</label>
+                        <select class="custom-select form-control-border" required name="stock_status" id="level">
+                            <option>Pilih Status</option>
+                            <option value="instock" {{ $menu->stock_status == 'instock' ? 'selected' : '' }}>instock</option>
+                            <option value="outofstock" {{ $menu->stock_status == 'outofstock' ? 'selected' : '' }}>outofstock</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">stock</label>
+                        <input type="number" minlength="0" class="form-control" required value="{{ $menu->stock }}" id="stock" name="stock" placeholder="Masukan stock">
+                      </div>
+
 
                   </div>
                   <!-- /.card-body -->
-  
+
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{ route('menu.index') }}" class="btn btn-danger">Kembali</a>
@@ -60,7 +76,7 @@
                 </form>
               </div>
               <!-- /.card -->
-  
+
         </div><!-- /.container-fluid -->
       </section>
 @endsection
