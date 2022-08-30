@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Pesanan;
+use App\Models\Order;
 use App\Models\PesananDetail;
 use DB;
 
@@ -18,7 +19,10 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        return view('backend/laporan/index');
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+
+        return view('backend/laporan/index', compact('pesanan','countNotif'));
     }
 
     /**

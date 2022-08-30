@@ -28,7 +28,7 @@
           </tr>
           </thead>
           <tbody>
-            @foreach ($pesanan as $key => $item)
+            @foreach ($pesananOr as $key => $item)
             <tr>
               <td>{{ $key+1 }}</td>
               <td>{{ $item->id }}</td>
@@ -59,8 +59,13 @@
               </td> --}}
               <td>
                 <center>
+<<<<<<< HEAD
                   <a class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
                   {{-- <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a> --}}
+=======
+                  <a style="margin: 5px;" class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
+                  <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a>
+>>>>>>> 6fdddd2bd24a4d9312b182687b83e304c3e05ae6
                 </center>
               </td>
               <td>

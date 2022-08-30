@@ -18,32 +18,32 @@
                 <table class="table table">
                       <tr>
                         <td width="20%">ID ORDER</td>
-                        <td>{{ $pesanan->id }}</td>
+                        <td>{{ $pesananOr->id }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Nama Pelanggan</td>
-                        <td>{{ $pesanan->nama_lengkap }}</td>
+                        <td>{{ $pesananOr->nama_lengkap }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Tanggal Pemesanan</td>
-                        <td>{{ $pesanan->created_at }}</td>
+                        <td>{{ $pesananOr->created_at }}</td>
                       </tr>
                       <tr>
                         <td width="20%">No. Hp</td>
-                        <td>{{ $pesanan->nohp }}</td>
+                        <td>{{ $pesananOr->nohp }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Alamat</td>
-                        <td>{{ $pesanan->alamat }}</td>
+                        <td>{{ $pesananOr->alamat }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Metode Pembayaran</td>
-                        <td>{{ $pesanan->transaction->mode }}</td>
+                        <td>{{ $pesananOr->transaction->mode }}</td>
                       </tr>
 
                       <tr>
                         <td width="20%">Catatan Pesanan</td>
-                        <td>{{ $pesanan->catatan }}</td>
+                        <td>{{ $pesananOr->catatan }}</td>
                       </tr>
 
                   </table>
@@ -64,7 +64,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($pesanan->orderItems as $item)
+                    @foreach ($pesananOr->orderItems as $item)
                     <tr>
                         <td>{{ $item->quantity }}</td>
                         <td><img src="{{ asset('storage/fotomenu/'. $item->menu->foto) }}" width="50%" ></td>
@@ -97,14 +97,14 @@
               </div> --}}
               <!-- /.col -->
               {{-- @php
-                  $total = $item->pesanan->total_harga + $pesanan->kode_unik;
+                  $total = $item->pesanan->total_harga + $pesananOr->kode_unik;
               @endphp --}}
               <div class="col-12">
                 <div class="table-responsive">
                   <table class="table">
                     <tr>
                       <th style="width:72%">Subtotal</th>
-                      <td>Rp. {{ number_format((float)$pesanan->subtotal,3,'.','.') }}</td>
+                      <td>Rp. {{ number_format((float)$pesananOr->subtotal,3,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Ongkir</th>
@@ -112,6 +112,7 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
+<<<<<<< HEAD
                       <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
                     </tr>
                     <tr>
@@ -122,6 +123,9 @@
                         <th>Tanggal cancel</th>
                         <td><b> {{$pesanan->canceled_date }}</b></td>
                         @endif
+=======
+                      <td><b> Rp. {{ number_format((float)$pesananOr->total,0,'.','.') }}</b></td>
+>>>>>>> 6fdddd2bd24a4d9312b182687b83e304c3e05ae6
                     </tr>
                   </table>
                 </div>
@@ -135,36 +139,36 @@
               <div class="col-12">
                 <form action="{{ route('pesanan.detail-print') }}">
                     @csrf
-                    <input type="hidden" value="{{ $pesanan->id }}" name="id">
+                    <input type="hidden" value="{{ $pesananOr->id }}" name="id">
                 <button type="submit" class="btn btn-default" rel="noopener" formtarget="_blank"><i class="fas fa-print"></i> Print</button>
                 </form>
                 {{-- <a href="{{ route('pesanan.detail-print') }}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
 
-                {{-- @if ($pesanan->status==1)
-                <a href="{{ route('pesanan.sudah-bayar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
+                {{-- @if ($pesananOr->status==1)
+                <a href="{{ route('pesanan.sudah-bayar', $pesananOr->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                   <i class="fas fa-money"></i> Sudah Bayar
                 </a>
-                @elseif ($pesanan->status == 2)
-                <a href="{{ route('pesanan.diproses', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
+                @elseif ($pesananOr->status == 2)
+                <a href="{{ route('pesanan.diproses', $pesananOr->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                     <i class="fas fa-money"></i> Proses
                   </a>
-                @elseif ($pesanan->status == 4)
-                <a href="{{ route('pesanan.diantar', $pesanan->id) }}" class="btn btn-success float-right" style="margin: 5px;">
+                @elseif ($pesananOr->status == 4)
+                <a href="{{ route('pesanan.diantar', $pesananOr->id) }}" class="btn btn-success float-right" style="margin: 5px;">
                     <i class="fas fa-money"></i> Antar
                   </a>
                 @endif --}}
 
-                {{-- @if($pesanan->status == 1)
+                {{-- @if($pesananOr->status == 1)
 
-                     @elseif ($pesanan->status == 2)
+                     @elseif ($pesananOr->status == 2)
 
-                     @elseif ($pesanan->status == 3)
+                     @elseif ($pesananOr->status == 3)
 
-                     @elseif ($pesanan->status == 4)
+                     @elseif ($pesananOr->status == 4)
 
-                     @elseif ($pesanan->status == 5)
+                     @elseif ($pesananOr->status == 5)
 
-                     @elseif ($pesanan->status == 6)
+                     @elseif ($pesananOr->status == 6)
 
                      @endif --}}
 
