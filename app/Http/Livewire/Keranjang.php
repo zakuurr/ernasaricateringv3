@@ -111,6 +111,10 @@ class Keranjang extends Component
         $this->kode_unik = mt_rand(99,100);
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
 $this->setAmountForCheckout();
+if(Auth::check())
+{
+    Cart::instance('cart')->store(Auth::user()->email);
+}
         return view('livewire.keranjang',compact('cartItems'))->layout('layouts.base');
     }
 }

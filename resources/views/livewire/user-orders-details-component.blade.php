@@ -109,7 +109,7 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
+                      <td><b> Rp. {{ number_format((float)$pesanan->total,0,'.','.') }}</b></td>
                     </tr>
                     <tr>
                         @if($pesanan->status == 'dikirim')
