@@ -92,7 +92,7 @@
           <a href="#" class="dropdown-item">
             <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }}
             {{-- <small>{{  }}</small> --}}
-            <span class="badge badge-success float-right text-sm">ordered</span>
+            <span class="badge badge-success float-right text-sm">dipesan</span>
           </a>
           @endforeach
           

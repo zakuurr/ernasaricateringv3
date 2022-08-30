@@ -3,16 +3,121 @@
 <meta name="_token" content="{{ csrf_token() }}">
 @endsection
 @section('content')
-      <!-- Content Wrapper. Contains page content -->
 
-    
-    
-    <!-- /.content-header -->
-    <div class="card">
+
+<div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Rekap Penjualan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Rekap Pendapatan</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode Pesanan</th>
+                  <th>Nama Pelanggan</th>
+                  <th>Total Harga</th>
+                  <th>Kode Unik</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($order as $key => $item)
+                  <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $item->kode_pemesanan }}</td>
+                    <td>{{ $item->user->name }}</td>
+                    <td>{{ $item->total_harga }}</td>
+                    <td>{{ $item->kode_unik }}</td>
+                    <td><span class="badge badge-danger">Belum hayar</span></td>
+                    <td>
+                      <center>
+                        <a class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
+                        <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a>
+                      </center>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+          </div>
+          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+             Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- <div class="card">
       <div class="card-header">
         <h2>Laporan</h2>
       </div>
-      <!-- /.card-header -->
       <div class="card-body">
             <div class="col-md-3">
                 <div class="form-group">
@@ -42,7 +147,7 @@
           </tr>
           </thead>
           <tbody>
-            {{-- @foreach ($pesanan as $key => $item)
+            @foreach ($pesanan as $key => $item)
             <tr>
               <td>{{ $key+1 }}</td>
               <td>{{ $item->kode_pemesanan }}</td>
@@ -57,14 +162,11 @@
                 </center>
               </td>
             </tr>
-            @endforeach --}}
+            @endforeach
           </tbody>
-         
         </table>
       </div>
-      <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
+    </div> --}}
 
 @section('js')
 <script type="text/javascript">
@@ -106,7 +208,7 @@ if (result.value) {
 
 </script>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 
     $('#search').on('click',function(){
         
@@ -133,7 +235,7 @@ if (result.value) {
     
     })
     
-    </script>
+    </script> --}}
     
     
 @endsection

@@ -22,7 +22,10 @@ class LaporanController extends Controller
         $pesanan = Order::where('status','ordered')->get();
         $countNotif = count($pesanan);
 
-        return view('backend/laporan/index', compact('pesanan','countNotif'));
+        //Rekap Penjualan
+        $order = Order::all();
+
+        return view('backend/laporan/index', compact('pesanan','countNotif','order'));
     }
 
     /**
