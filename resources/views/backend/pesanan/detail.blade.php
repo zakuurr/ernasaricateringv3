@@ -112,7 +112,16 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td><b> Rp. {{ number_format($pesanan->total,0,'.','.') }}</b></td>
+                      <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
+                    </tr>
+                    <tr>
+                        @if($pesanan->status == 'dikirim')
+                        <th>Tanggal kirim</th>
+                        <td><b> {{$pesanan->delivered_date }}</b></td>
+                        @elseif($pesanan->status == 'cancel')
+                        <th>Tanggal cancel</th>
+                        <td><b> {{$pesanan->canceled_date }}</b></td>
+                        @endif
                     </tr>
                   </table>
                 </div>

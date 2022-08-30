@@ -111,6 +111,15 @@
                       <th>Total:</th>
                       <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
                     </tr>
+                    <tr>
+                        @if($pesanan->status == 'dikirim')
+                        <th>Tanggal kirim</th>
+                        <td><b> {{$pesanan->delivered_date }}</b></td>
+                        @elseif($pesanan->status == 'cancel')
+                        <th>Tanggal cancel</th>
+                        <td><b> {{$pesanan->canceled_date }}</b></td>
+                        @endif
+                    </tr>
                   </table>
                 </div>
               </div>
@@ -151,8 +160,9 @@
                      @elseif ($pesanan->status == 6)
 
                      @endif --}}
-
-
+@if($pesanan->status == 'dipesan')
+                     <a href="{{ route('orders') }}" style="margin: 5px;" wire:click.prevent="cancelOrder" class="tombol-cancel btn btn-danger float-right"><i class="far fa-back"></i> Cancel Order </a>
+@endif
                 <a href="{{ route('orders') }}" style="margin: 5px;" class="btn btn-warning float-right"><i class="far fa-back"></i> Kembali </a>
               </div>
             </div>
@@ -163,4 +173,33 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 
+    <script>
+    $('.tombol-cancel').on('click', function (e) {
+
+        e.preventDefault();
+
+        const href =$(this).attr('href');
+
+        Swal.fire({
+        title: 'Apakah anda yakin ?',
+        text: "Transaksi pesanan ini akan dicancel",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya'
+        }).then((result) => {
+        if (result.value) {
+            document.location.href = href;
+            Swal.fire(
+          'Berhasil!',
+          'Pesanan berhasil dicancel.',
+          'success'
+        )
+        }
+        })
+
+        });
+
+        </script>
 </div>

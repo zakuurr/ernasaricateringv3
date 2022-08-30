@@ -9,6 +9,7 @@ use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PesananController extends Controller
 {
@@ -29,6 +30,19 @@ class PesananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function updateOrderStatus($id,$status) {
+        $order = Order::find($id);
+        $order->status = $status;
+        if($status == "dikirim")
+        {
+            $order->delivered_date = DB::raw('CURRENT_DATE');
+        }else if($status == "cancel"){
+            $order->canceled_date = DB::raw('CURRENT_DATE');
+        }
+        $order->save();
+        session()->flash('success','Order status berhasil di ubah');
+        return redirect()->back();
+    }
     public function detailPrint(Request $request)
     {
         $pesanan = Order::find($request->id);

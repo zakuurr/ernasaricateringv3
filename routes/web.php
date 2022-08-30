@@ -30,6 +30,9 @@ Route::get('/orders/{order_id}', \App\Http\Livewire\UserOrdersDetailsComponent::
 
 Route::get('/thankyou', \App\Http\Livewire\ThankyouComponent::class)->name('thankyou');
 
+Route::get('/ubahpassword', \App\Http\Livewire\UserChangePasswordComponent::class)->name('ubahpassword');
+
+
 //backend
 Route::get('/backend-page', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');
 
@@ -81,7 +84,7 @@ Route::prefix('pesanan')->group(function () {
     Route::get('/', [App\Http\Controllers\Backend\PesananController::class, 'index'])->name('pesanan.index');
     Route::get('/detail/{id}', [App\Http\Controllers\Backend\PesananController::class, 'detail'])->name('pesanan.detail');
     Route::get('/detail-print', [App\Http\Controllers\Backend\PesananController::class, 'detailPrint'])->name('pesanan.detail-print');
-    Route::get('/sudah-bayar/{id}', [App\Http\Controllers\Backend\PesananController::class, 'sudahBayar'])->name('pesanan.sudah-bayar');
+    Route::get('/updateOrderStatus/{id}/{status}', [App\Http\Controllers\Backend\PesananController::class, 'updateOrderStatus'])->name('pesanan.updateOrderStatus');
     Route::get('/diproses/{id}', [App\Http\Controllers\Backend\PesananController::class, 'diProses'])->name('pesanan.diproses');
 
     Route::get('/diantar/{id}', [App\Http\Controllers\Backend\PesananController::class, 'diAntar'])->name('pesanan.diantar');

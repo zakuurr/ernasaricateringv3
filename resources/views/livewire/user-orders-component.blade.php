@@ -58,6 +58,7 @@
                     {{-- <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a> --}}
                   </center>
                 </td>
+
               </tr>
               @endforeach
             </tbody>

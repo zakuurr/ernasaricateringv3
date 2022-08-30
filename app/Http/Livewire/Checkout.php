@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Pesanan;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -63,7 +65,7 @@ if($this->shipping)
     $order->email = $this->email;
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
-    $order->status = 'ordered';
+    $order->status = 'dipesan';
     $order->catatan = $this->catatan;
     $order->save();
 } else {
@@ -77,7 +79,7 @@ if($this->shipping)
     $order->email = $this->email;
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
-    $order->status = 'ordered';
+    $order->status = 'dipesan';
     $order->catatan = $this->catatan;
     $order->save();
 }
@@ -93,27 +95,46 @@ if($this->shipping)
 
         if($this->pembayaran == 'COD')
         {
-            $transaction = new Transaction();
-            $transaction->user_id = Auth::user()->id;
-            $transaction->order_id = $order->id;
-            $transaction->mode = 'cod';
-            $transaction->status = 'pending';
-            $transaction->save();
-
+            // $transaction = new Transaction();
+            // $transaction->user_id = Auth::user()->id;
+            // $transaction->order_id = $order->id;
+            // $transaction->mode = 'cod';
+            // $transaction->status = 'pending';
+            // $transaction->save();
+            $this->makeTransaction($order->id,'pending');
+$this->resetCart();
         } else if($this->pembayaran == 'Transfer')
         {
-            $transaction = new Transaction();
-            $transaction->user_id = Auth::user()->id;
-            $transaction->order_id = $order->id;
-            $transaction->mode = 'transfer';
-            $transaction->status = 'pending';
-            $transaction->save();
+            // $transaction = new Transaction();
+            // $transaction->user_id = Auth::user()->id;
+            // $transaction->order_id = $order->id;
+            // $transaction->mode = 'transfer';
+            // $transaction->status = 'pending';
+            // $transaction->save();
+            $this->makeTransaction($order->id,'pending');
+            $this->resetCart();
         }
 
+        $this->sendOrderConfirmationMail($order);
+
+    }
+    public function resetCart() {
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+    }
 
+    public function sendOrderConfirmationMail($order) {
+        Mail::to($order->email)->send(new OrderMail($order));
+    }
+
+    public function makeTransaction($order_id,$status) {
+            $transaction = new Transaction();
+            $transaction->user_id = Auth::user()->id;
+            $transaction->order_id = $order_id;
+            $transaction->mode = $this->pembayaran;
+            $transaction->status = $status;
+            $transaction->save();
     }
 
     public function verifyForCheckout() {

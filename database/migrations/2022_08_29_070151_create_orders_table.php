@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->text('alamat')->nullable();
             $table->text('alamat2')->nullable();
-            $table->enum('status',['ordered','delivered','canceled'])->default('ordered');
+            $table->enum('status',['dipesan','dikirim','cancel'])->default('dipesan');
             $table->boolean('is_shipping_different')->default(false);
             $table->timestamps();
 

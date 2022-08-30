@@ -18,13 +18,13 @@
             <th>Order ID</th>
             <th>Sub total</th>
             <th>Total</th>
-            <th>Nama Lengkap</th>
+            {{-- <th>Nama Lengkap</th>
             <th>Email</th>
             <th>No Hp</th>
-            <th>Alamat</th>
+            <th>Alamat</th> --}}
             <th>Status</th>
             <th>Order Date</th>
-            <th>Action</th>
+            <th colspan="2" class="text-center">Action</th>
           </tr>
           </thead>
           <tbody>
@@ -34,10 +34,10 @@
               <td>{{ $item->id }}</td>
               <td>{{ $item->subtotal }}</td>
               <td>{{ $item->total }}</td>
-              <td>{{ $item->nama_lengkap }}</td>
+              {{-- <td>{{ $item->nama_lengkap }}</td>
               <td>{{ $item->email }}</td>
               <td>{{ $item->nohp }}</td>
-              <td>{{ $item->alamat }}</td>
+              <td>{{ $item->alamat }}</td> --}}
               <td>{{ $item->status }}</td>
               <td>{{ $item->created_at }}</td>
               {{-- <td>
@@ -60,9 +60,23 @@
               <td>
                 <center>
                   <a class="btn btn-warning" href="{{ route('pesanan.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
-                  <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a>
+                  {{-- <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a> --}}
                 </center>
               </td>
+              <td>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Status
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{{ route('pesanan.updateOrderStatus',['id'=>$item->id,'status'=>'dikirim'])}}">Dikirim</a>
+                      <a class="dropdown-item" href="{{ route('pesanan.updateOrderStatus',['id'=>$item->id,'status'=>'cancel'])}}">Cancel</a>
+
+                    </div>
+                  </div>
+
+            </td>
+            </div>
             </tr>
             @endforeach
           </tbody>
