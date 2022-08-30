@@ -112,7 +112,6 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-<<<<<<< HEAD
                       <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
                     </tr>
                     <tr>
@@ -123,9 +122,6 @@
                         <th>Tanggal cancel</th>
                         <td><b> {{$pesanan->canceled_date }}</b></td>
                         @endif
-=======
-                      <td><b> Rp. {{ number_format((float)$pesananOr->total,0,'.','.') }}</b></td>
->>>>>>> 6fdddd2bd24a4d9312b182687b83e304c3e05ae6
                     </tr>
                   </table>
                 </div>
