@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('title')
+    Lowongan Pekerjaan | Create
+@endsection
 @section('content')
 <br>
     <section class="content">

@@ -1,6 +1,6 @@
 @extends('backend/layout-master')
 @section('title')
-    Lowongan Pekerjaan | Edit
+   Rekapan Penjualan Ernasari
 @endsection
 @section('css')
 <meta name="_token" content="{{ csrf_token() }}">

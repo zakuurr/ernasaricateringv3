@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Pesanan;
 use App\Models\Order;
+use App\Models\Orderitem;
 use App\Models\PesananDetail;
 use DB;
 
@@ -19,10 +20,13 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $pesanan = Order::where('status','ordered')->get();
+        $pesanan = Order::where('status','dipesan')->get();
         $countNotif = count($pesanan);
 
-        return view('backend/laporan/index', compact('pesanan','countNotif'));
+        //Rekap Penjualan
+        $orderitem = DB::select('SELECT sum(order_items.quantity) as quantity, menu.nama_menu FROM order_items JOIN menu ON menu.id=order_items.menu_id JOIN orders ON orders.id=order_items.order_id GROUP BY menu.nama_menu');
+
+        return view('backend/laporan/index', compact('pesanan','countNotif','orderitem'));
     }
 
     /**
@@ -102,53 +106,27 @@ class LaporanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function show(Request $request)
     {
-        //
+        // return $request;
+        if ($request->jenis_laporan == 'rpenjualan') {
+            //Notifikasi
+            $pesanan = Order::where('status','dipesan')->get();
+            $countNotif = count($pesanan);
+            $orderitem = Orderitem::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)->get();
+            
+            return view('backend/laporan/rekap-penjualan', compact('orderitem','pesanan','countNotif'));
+        }else{
+            //Notifikasi
+            $pesanan = Order::where('status','dipesan')->get();
+            $countNotif = count($pesanan);
+            $orderitem = Order::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
+            ->where('status','dikirim')
+            ->get();
+
+
+            return view('backend/laporan/rekap-pendapatan', compact('orderitem','pesanan','countNotif'));
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   {{-- <meta name="_token" content="{{ csrf_token() }}"> --}}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ernasari Catering | Dashboard</title>
+  <title>@yield('title')</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -89,16 +89,18 @@
           <span class="dropdown-item dropdown-header">{{$countNotif}} Pesanan Baru</span>
           @foreach ($pesanan as $item)
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="{{ route('pesanan.index') }}" class="dropdown-item">
             <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }}
             {{-- <small>{{  }}</small> --}}
-            <span class="badge badge-success float-right text-sm">ordered</span>
+            <span class="badge badge-success float-right text-sm">dipesan</span>
           </a>
           @endforeach
           
           
           <div class="dropdown-divider"></div>
+          @if ($countNotif>0)
           <a href="{{ route('pesanan.index') }}" class="dropdown-item dropdown-footer">Lihat Semua</a>
+          @endif
         </div>
       </li>
 

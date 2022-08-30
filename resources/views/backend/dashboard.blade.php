@@ -1,4 +1,7 @@
 @extends('backend.layout-master')
+@section('title')
+    Ernasari Catering | Dashboard
+@endsection
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">

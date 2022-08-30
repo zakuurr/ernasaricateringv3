@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('title')
+    Detail Pesanan
+@endsection
 @section('content')
 <br>
 <section class="content">
