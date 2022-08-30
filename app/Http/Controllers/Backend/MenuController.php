@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Kategori;
 use Illuminate\Http\Request;
 use App\Models\Backend\Menu;
+use App\Models\Order;
 
 class MenuController extends Controller
 {
@@ -18,8 +19,10 @@ class MenuController extends Controller
     {
         $menu = Menu::all();
         $kategori = Kategori::all();
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/menu/index', compact('menu','kategori'));
+        return view('backend/menu/index', compact('pesanan','countNotif','menu','kategori'));
     }
 
     /**
@@ -29,7 +32,10 @@ class MenuController extends Controller
      */
     public function create()
     {   $kategori = Kategori::all();
-        return view('backend/menu/create',compact('kategori'));
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+
+        return view('backend/menu/create',compact('kategori','pesanan','countNotif'));
     }
 
     /**
@@ -85,7 +91,10 @@ class MenuController extends Controller
     {
         $kategori = Kategori::all();
         $menu = Menu::find($id);
-        return view('backend/menu/edit', compact('menu','kategori'));
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+
+        return view('backend/menu/edit', compact('menu','kategori','pesanan','countNotif'));
     }
 
     /**

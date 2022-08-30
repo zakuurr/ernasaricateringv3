@@ -19,9 +19,11 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanan = Order::orderBy('created_at','DESC')->get();
+        $pesananOr = Order::orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/pesanan/index', compact('pesanan'));
+        return view('backend/pesanan/index', compact('pesanan','pesananOr','countNotif'));
     }
 
     /**
@@ -58,13 +60,14 @@ class PesananController extends Controller
      */
     public function detail($id)
     {
-        $pesanan = Order::find($id);
-        $user = User::find($pesanan->user_id);
+        $pesananOr = Order::find($id);
+        $user = User::find($pesananOr->user_id);
         // $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
-        $tanggal = Carbon::parse($pesanan->created_at)->translatedFormat('d F Y');
+        $tanggal = Carbon::parse($pesananOr->created_at)->translatedFormat('d F Y');
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-
-        return view('backend/pesanan/detail',compact('pesanan','user','tanggal'));
+        return view('backend/pesanan/detail',compact('pesanan','user','tanggal','pesananOr','countNotif'));
     }
 
     /**

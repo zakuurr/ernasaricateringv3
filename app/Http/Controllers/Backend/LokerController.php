@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Loker;
+use App\Models\Order;
 
 class LokerController extends Controller
 {
@@ -16,8 +17,10 @@ class LokerController extends Controller
     public function index()
     {
         $loker = Loker::all();
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/loker/index',compact('loker'));
+        return view('backend/loker/index',compact('loker','pesanan','countNotif'));
     }
 
     /**
@@ -27,7 +30,9 @@ class LokerController extends Controller
      */
     public function create()
     {
-        return view('backend/loker/create');
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+        return view('backend/loker/create', compact('pesanan','countNotif'));
     }
 
     /**
@@ -86,8 +91,10 @@ class LokerController extends Controller
     public function edit($id)
     {
         $loker = Loker::find($id);
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/loker/edit', compact('loker'));
+        return view('backend/loker/edit', compact('loker','pesanan','countNotif'));
     }
 
     /**

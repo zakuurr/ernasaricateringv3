@@ -32,7 +32,7 @@
 
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="{{ route('menu.index') }}" class="btn btn-danger">Kembali</a>
+                    <a href="{{ route('kategori.index') }}" class="btn btn-danger">Kembali</a>
                   </div>
                 </form>
               </div>

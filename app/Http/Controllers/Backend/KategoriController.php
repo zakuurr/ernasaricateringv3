@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Kategori;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -15,8 +16,10 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/kategori/index', compact('kategori'));
+        return view('backend/kategori/index', compact('kategori','pesanan','countNotif'));
     }
 
     /**
@@ -26,7 +29,9 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('backend/kategori/create');
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+        return view('backend/kategori/create', compact('pesanan','countNotif'));
     }
 
     /**
@@ -75,7 +80,9 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $kategori = Kategori::find($id);
-        return view('backend/kategori/edit', compact('kategori'));
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+        return view('backend/kategori/edit', compact('kategori','pesanan','countNotif'));
     }
 
     /**

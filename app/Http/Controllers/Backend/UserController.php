@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Level;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -18,7 +19,9 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('backend/user/index', compact('user'));
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+        return view('backend/user/index', compact('user','pesanan','countNotif'));
     }
 
     /**
@@ -29,7 +32,10 @@ class UserController extends Controller
     public function create()
     {
         $level = Level::all();
-        return view('backend/user/create', compact('level'));
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
+
+        return view('backend/user/create', compact('level','pesanan','countNotif'));
     }
 
     /**
@@ -87,8 +93,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $level = Level::all();
+        $pesanan = Order::where('status','ordered')->get();
+        $countNotif = count($pesanan);
 
-        return view('backend/user/edit', compact('user','level'));
+        return view('backend/user/edit', compact('user','level','pesanan','countNotif'));
     }
 
     /**
