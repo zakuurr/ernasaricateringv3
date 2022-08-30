@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('title')
+    Ernasari Catering | Pesanan
+@endsection
 @section('content')
       <!-- Content Wrapper. Contains page content -->
 

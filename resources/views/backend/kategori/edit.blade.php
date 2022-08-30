@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('title')
+   Management Kategori | Edit
+@endsection
 @section('content')
 <br>
     <section class="content">

@@ -1,4 +1,7 @@
 @extends('backend/layout-master')
+@section('title')
+    User Management | Edit
+@endsection
 @section('content')
 
    <br>
