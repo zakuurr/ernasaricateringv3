@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <a href="{{ route('pesanan.index') }}" class="btn btn-danger">Kembali</a>
+        <a href="{{ route('laporan.index') }}" class="btn btn-danger">Kembali</a>
       </div>
       <!-- /.card -->
     </div>
@@ -206,7 +206,7 @@ if (result.value) {
 
 </script>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 
     $('#search').on('click',function(){
         
@@ -233,8 +233,24 @@ if (result.value) {
     
     })
     
+    </script> --}}
+    
+    <script>
+      $(function () {
+        $("#example1").DataTable({
+          "responsive": true, "lengthChange": false, "autoWidth": false,
+          "buttons": ["excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
     </script>
-    
-    
 @endsection
 @endsection
