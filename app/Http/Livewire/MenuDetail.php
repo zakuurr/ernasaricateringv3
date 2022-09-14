@@ -41,6 +41,11 @@ class MenuDetail extends Component
     {
         $cart = Cart::content();
         $menu = Menu::where('slug',$this->slug)->first();
+
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
+        }
         return view('livewire.menu-detail',['menus' => $menu , 'carts' => $cart])->layout('layouts.base');
     }
 // public function masukanKeranjang(){

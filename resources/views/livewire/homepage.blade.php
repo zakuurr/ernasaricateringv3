@@ -107,7 +107,7 @@
                   <img src="{{ asset('storage/fotomenu/'. $menu->foto) }}" alt="Image placeholder" class="img-fluid">
                 </figure>
                 <div class="block-4-text p-4">
-                  <h3><a href="{{ url('list-menu/'.$menu->id)}}">{{$menu->nama_menu}}</a></h3>
+                  <h3><a href="{{ url('list-menu/'.$menu->slug)}}">{{$menu->nama_menu}}</a></h3>
                   <p class="mb-0">{{$menu->deskripsi}}</p>
                   <p class="text-primary font-weight-bold">Rp.{{number_format($menu->harga,0,'.','.')}}</p>
                 </div>

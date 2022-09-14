@@ -17,7 +17,7 @@
 						</p>
 						<p class="row-in-form">
 							<label for="nohp">No Handphone<span>*</span></label>
-							<input id="nohp" type="number" wire:model="nohp" placeholder="Masukan No Telepon">
+							<input id="nohp" type="text" wire:model="nohp" placeholder="Masukan No Telepon">
 						</p>
 						<p class="row-in-form pl-3">
 							<label for="add">Alamat:</label>

@@ -52,6 +52,11 @@ public function placeOrder() {
 
         ]);
 
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->nohp = $this->nohp;
+        $user->alamat = $this->alamat;
+        $user->update();
+
 if($this->shipping)
 {
 
@@ -152,31 +157,20 @@ $this->resetCart();
     }
     }
 
-    // public $total_harga,$nohp,$alamat,$metode_p;
+    public function mount(){
+        if(!Auth::User())
+        {
+            return redirect()->route('login');
+        }
 
-    // public function mount(){
-    //     if(!Auth::User())
-    //     {
-    //         return redirect()->route('login');
-    //     }
+        $this->nama_lengkap = Auth::user()->name;
+        $this->alamat = Auth::user()->alamat;
+        $this->email = Auth::user()->email;
+        $this->nohp = Auth::user()->nohp;
 
-    //     $this->nohp = Auth::user()->nohp;
-    //     $this->alamat = Auth::user()->alamat;
 
-    //     $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
 
-    //     if(!empty($pesanan)){
-    //         if ($this->metode_p === 'COD') {
-
-    //             $this->total_harga = $pesanan->total_harga+$pesanan->kode_unik + 10000;
-    //         } else {
-    //             $this->total_harga = $pesanan->total_harga+$pesanan->kode_unik;
-    //     }
-    //     } else
-    //     {
-    //         return redirect()->route('home');
-    //     }
-    // }
+    }
 
     // public function checkout() {
     //    $this->validate([
