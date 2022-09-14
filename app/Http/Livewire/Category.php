@@ -33,7 +33,7 @@ class Category extends Component
         $kategori_nama = $kategori->kategori;
         return view('livewire.category',[
             'menus' => BackendMenu::where('nama_menu','LIKE','%'.$this->search.'%')->where('id_kategori',$id_kategori)->paginate(6),
-            'menus2' => BackendMenu::where('id_kategori',3)->paginate(3),
+            'menus2' => BackendMenu::inRandomOrder()->limit(3)->get(),
             'kategoris' => Kategori::all(),
             'kategori_nama' => $kategori_nama
         ])->layout('layouts.base');

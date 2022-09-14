@@ -120,10 +120,10 @@
                     <tr>
                         @if($pesananOr->status == 'dikirim')
                         <th>Tanggal kirim</th>
-                        <td><b> {{$pesanan->delivered_date }}</b></td>
+                        <td><b> {{$pesananOr->delivered_date }}</b></td>
                         @elseif($pesananOr->status == 'cancel')
                         <th>Tanggal cancel</th>
-                        <td><b> {{$pesanan->canceled_date }}</b></td>
+                        <td><b> {{$pesananOr->canceled_date }}</b></td>
                         @endif
                     </tr>
                   </table>

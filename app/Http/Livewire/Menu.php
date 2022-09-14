@@ -15,6 +15,7 @@ class Menu extends Component
 
     public $search;
 
+
     protected $paginationTheme = 'bootstrap';
 
     public function mount() {

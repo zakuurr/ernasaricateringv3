@@ -30,8 +30,9 @@ Route::get('/orders/{order_id}', \App\Http\Livewire\UserOrdersDetailsComponent::
 
 Route::get('/thankyou', \App\Http\Livewire\ThankyouComponent::class)->name('thankyou');
 
-Route::get('/ubahpassword', \App\Http\Livewire\UserChangePasswordComponent::class)->name('ubahpassword');
-
+Route::get('/ubahpassword', \App\Http\Livewire\UserChangePasswordComponent  ::class)->name('ubahpassword');
+Route::get('/profile', \App\Http\Livewire\UserProfileComponent  ::class)->name('profile');
+Route::get('/editprofile', \App\Http\Livewire\UserEditProfileComponent  ::class)->name('editprofile');
 
 //backend
 Route::get('/backend-page', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');

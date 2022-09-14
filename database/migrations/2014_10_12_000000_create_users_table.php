@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('utype')->default('USR')->comment('ADM for Admin USR for USER or Customer');
             $table->string('foto')->nullable();
             $table->timestamps();
+            $table->string('remember_token', 100);
         });
     }
 

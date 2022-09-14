@@ -25,7 +25,7 @@
 							<div class="price-field produtc-price"><p class="price">Rp. {{number_format($item->model->harga,0,'.','.')}}</p></div>
 							<div class="quantity">
 								<div class="quantity-input">
-									<input type="text" name="product-quatity" value="{{$item->qty}}" data-max="120" pattern="[0-9]*" >
+									<input type="number" name="product-quatity" value="{{$item->qty}}" pattern="[0-9]*" max="{{$item->model->stock}}">
 									<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
 									<a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
 								</div>

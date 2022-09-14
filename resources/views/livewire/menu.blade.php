@@ -87,7 +87,7 @@
               <div class="row">
                 @foreach($menus2 as $menu2)
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                  <a class="block-2-item" href="#">
+                  <a class="block-2-item" href="{{route('menu.kategori',$menu2->kategori->id)}}">
                     <figure class="image">
                       <img src="{{ asset('storage/fotomenu/'. $menu2->foto) }}" alt="" class="img-fluid">
                     </figure>

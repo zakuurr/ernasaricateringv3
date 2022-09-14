@@ -21,7 +21,12 @@
         <span class="badge text-bg-danger"><i class="fa-solid fa-x"></i> Stok Habis</span>
         @endif --}}
           <p>{{$menus->deskripsi}}</p>
-          <h5 class="text-black">Stok Tersedia : {{$menus->stock}}</h5>
+          @if($menus->stock > 1)
+          <span class="badge text-bg-success"><i class="fa-solid fa-check"></i> Menu Tersedia</span>
+          @else
+          <span class="badge text-bg-danger"><i class="fa-solid fa-x"></i> Menu Habis</span>
+          @endif
+          {{-- <h5 class="text-black">Stok Tersedia : {{$menus->stock}}</h5> --}}
 
           <p><strong class="text-primary h4">Rp. {{number_format($menus->harga,0,'.','.')}}</strong></p>
           {{-- <form wire:submit.prevent="masukanKeranjang"> --}}
@@ -39,9 +44,9 @@
 @enderror
           </div>
           @if($menus->stock > 1)
-          <p><button wire:click.prevent="store({{$menus->id}},'{{$menus->nama_menu}}',{{$menus->harga}})" type="submit" class="btn btn-sm text-black" style="background-color: #d49701; :color : black" @if($menus->stock_status === 'outofstock') @disabled(true) @endif>Add To Cart</button></p>
+          <p><button wire:click.prevent="store({{$menus->id}},'{{$menus->nama_menu}}',{{$menus->harga}})" type="submit" class="btn btn-sm text-black" style="background-color: #d49701; :color : black" @if($menus->stock_status === 'outofstock') @disabled(true) @endif>Tambahkan Ke Keranjang</button></p>
           @else
-          <span class="badge text-bg-danger"><i class="fa-solid fa-x"></i> Stok Habis</span>
+
           @endif
         {{-- </form> --}}
         </div>

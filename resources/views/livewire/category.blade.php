@@ -29,10 +29,10 @@
                 <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                     <div class="block-4 text-center border">
                       <figure class="block-4-image">
-                        <a href="{{ route('menu.detail', $menu->id) }}"><img src="{{ asset('storage/fotomenu/'. $menu->foto) }}" alt="Image placeholder" class="img-fluid"></a>
+                        <a href="{{ route('menu.detail', $menu->slug) }}"><img src="{{ asset('storage/fotomenu/'. $menu->foto) }}" alt="Image placeholder" class="img-fluid"></a>
                       </figure>
                       <div class="block-4-text p-4">
-                        <h3><a href="{{ route('menu.detail', $menu->id) }}">{{$menu->nama_menu}}</a></h3>
+                        <h3><a href="{{ route('menu.detail', $menu->slug) }}">{{$menu->nama_menu}}</a></h3>
                         <p class="mb-0">{{$menu->deskripsi}}</p>
                         <p class="text-primary font-weight-bold">Rp.{{number_format($menu->harga,0,'.','.')}}</p>
                       </div>
@@ -84,7 +84,7 @@
                   <div class="row">
                     @foreach($menus2 as $menu2)
                     <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                      <a class="block-2-item" href="#">
+                      <a class="block-2-item" href="{{route('menu.kategori',$menu2->kategori->id)}}">
                         <figure class="image">
                           <img src="{{ asset('storage/fotomenu/'. $menu2->foto) }}" alt="" class="img-fluid">
                         </figure>

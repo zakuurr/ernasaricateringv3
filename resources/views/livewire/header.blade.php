@@ -54,6 +54,8 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" >
+                            <a class="dropdown-item" href="{{route('profile')}}">
+                                Profile Saya
                             <a class="dropdown-item" href="{{route('ubahpassword')}}">
                              Ubah Password
                          </a>

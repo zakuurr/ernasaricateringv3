@@ -54,7 +54,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-          <a class="block-2-item" href="#">
+          <a class="block-2-item" href="{{url('menu-kategori/1')}}">
             <figure class="image">
               <img src="{{ asset('')}}frontend/images/paketpremium.jpg" alt="" class="img-fluid">
             </figure>
@@ -65,7 +65,7 @@
           </a>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-          <a class="block-2-item" href="#">
+          <a class="block-2-item"  href="{{url('menu-kategori/2')}}">
             <figure class="image">
               <img src="{{ asset('')}}frontend/images/capcay.jpg" alt="" class="img-fluid">
             </figure>
@@ -76,7 +76,7 @@
           </a>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-          <a class="block-2-item" href="#">
+          <a class="block-2-item" href="{{url('menu-kategori/3')}}">
             <figure class="image">
               <img src="{{ asset('')}}frontend/images/menuutama.jpg" alt="" class="img-fluid">
             </figure>
@@ -107,7 +107,7 @@
                   <img src="{{ asset('storage/fotomenu/'. $menu->foto) }}" alt="Image placeholder" class="img-fluid">
                 </figure>
                 <div class="block-4-text p-4">
-                  <h3><a href="{{ url('list-menu/'.$menu->id)}}">{{$menu->nama_menu}}</a></h3>
+                  <h3><a href="{{ url('list-menu/'.$menu->slug)}}">{{$menu->nama_menu}}</a></h3>
                   <p class="mb-0">{{$menu->deskripsi}}</p>
                   <p class="text-primary font-weight-bold">Rp.{{number_format($menu->harga,0,'.','.')}}</p>
                 </div>

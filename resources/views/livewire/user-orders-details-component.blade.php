@@ -14,7 +14,7 @@
             <div class="row invoice-info">
                 <table class="table table">
                       <tr>
-                        <td width="20%">ID ORDER</td>
+                        <td width="20%">ID Pesanan</td>
                         <td>{{ $pesanan->id }}</td>
                       </tr>
                       <tr>
@@ -54,7 +54,7 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th width="10%">Qty</th>
+                    <th width="10%">Kuantitas</th>
                     <th width="20%">Foto</th>
                     <th>Menu Makanan</th>
                     <th>Harga</th>
@@ -109,7 +109,7 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td><b> Rp. {{ number_format((float)$pesanan->total,3,'.','.') }}</b></td>
+                      <td><b> Rp. {{ number_format((float)$pesanan->total,0,'.','.') }}</b></td>
                     </tr>
                     <tr>
                         @if($pesanan->status == 'dikirim')
