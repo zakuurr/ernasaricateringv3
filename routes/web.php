@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum','verified','authadmin'])->group(function(){
 });
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('user')->group(function () {
+Route::prefix('user-backend')->group(function () {
     Route::get('/', [App\Http\Controllers\Backend\UserController::class, 'index'])->name('user.index');
     Route::get('/create', [App\Http\Controllers\Backend\UserController::class, 'create'])->name('user.create');
     Route::post('/store', [App\Http\Controllers\Backend\UserController::class, 'store'])->name('user.store');

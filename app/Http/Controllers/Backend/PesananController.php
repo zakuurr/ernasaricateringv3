@@ -21,7 +21,7 @@ class PesananController extends Controller
     public function index()
     {
         $pesananOr = Order::orderBy('created_at','DESC')->get();
-        $pesanan = Order::where('status','dipesan')->get();
+        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/pesanan/index', compact('pesanan','pesananOr','countNotif'));
@@ -78,7 +78,7 @@ class PesananController extends Controller
         $user = User::find($pesananOr->user_id);
         // $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
         $tanggal = Carbon::parse($pesananOr->created_at)->translatedFormat('d F Y');
-        $pesanan = Order::where('status','dipesan')->get();
+        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/pesanan/detail',compact('pesanan','user','tanggal','pesananOr','countNotif'));

@@ -90,8 +90,8 @@
           @foreach ($pesanan as $item)
           <div class="dropdown-divider"></div>
           <a href="{{ route('pesanan.index') }}" class="dropdown-item">
-            <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }}
-            {{-- <small>{{  }}</small> --}}
+            <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }} <br>
+            <i><small>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y H:i'); }}</small></i>
             <span class="badge badge-success float-right text-sm">dipesan</span>
           </a>
           @endforeach
