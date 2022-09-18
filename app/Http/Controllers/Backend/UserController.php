@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC') ->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC') ->get();
         $countNotif = count($pesanan);
         return view('backend/user/index', compact('user','pesanan','countNotif'));
     }
@@ -32,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
         $level = Level::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC') ->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC') ->get();
         $countNotif = count($pesanan);
 
         return view('backend/user/create', compact('level','pesanan','countNotif'));
@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $level = Level::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC') ->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC') ->get();
         $countNotif = count($pesanan);
 
         return view('backend/user/edit', compact('user','level','pesanan','countNotif'));

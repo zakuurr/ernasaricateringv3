@@ -19,7 +19,7 @@ class MenuController extends Controller
     {
         $menu = Menu::all();
         $kategori = Kategori::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/menu/index', compact('pesanan','countNotif','menu','kategori'));
@@ -32,7 +32,7 @@ class MenuController extends Controller
      */
     public function create()
     {   $kategori = Kategori::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/menu/create',compact('kategori','pesanan','countNotif'));
@@ -91,7 +91,7 @@ class MenuController extends Controller
     {
         $kategori = Kategori::all();
         $menu = Menu::find($id);
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/menu/edit', compact('menu','kategori','pesanan','countNotif'));

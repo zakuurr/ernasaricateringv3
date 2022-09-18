@@ -17,7 +17,7 @@ class LokerController extends Controller
     public function index()
     {
         $loker = Loker::all();
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/loker/index',compact('loker','pesanan','countNotif'));
@@ -30,7 +30,7 @@ class LokerController extends Controller
      */
     public function create()
     {
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         return view('backend/loker/create', compact('pesanan','countNotif'));
     }
@@ -91,7 +91,7 @@ class LokerController extends Controller
     public function edit($id)
     {
         $loker = Loker::find($id);
-        $pesanan = Order::where('status','dipesan')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/loker/edit', compact('loker','pesanan','countNotif'));
