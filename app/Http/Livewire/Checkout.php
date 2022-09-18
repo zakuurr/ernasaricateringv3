@@ -70,7 +70,7 @@ if($this->shipping)
     $order->email = $this->email;
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
-    $order->status = 'dipesan';
+    $order->status = 'konfirmasi';
     $order->catatan = $this->catatan;
     $order->save();
 } else {
@@ -84,7 +84,7 @@ if($this->shipping)
     $order->email = $this->email;
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
-    $order->status = 'dipesan';
+    $order->status = 'konfirmasi';
     $order->catatan = $this->catatan;
     $order->save();
 }
