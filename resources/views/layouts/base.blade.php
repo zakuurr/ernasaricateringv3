@@ -202,6 +202,9 @@
           </footer>
     </div>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCssE4bo3C89t0LdElu61SP3QYkmRfbJBA&libraries=places"></script>
+
+    <script src="{{ asset('/')}}frontend/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>

@@ -33,6 +33,7 @@ Route::get('/thankyou', \App\Http\Livewire\ThankyouComponent::class)->name('than
 Route::get('/ubahpassword', \App\Http\Livewire\UserChangePasswordComponent  ::class)->name('ubahpassword');
 Route::get('/profile', \App\Http\Livewire\UserProfileComponent  ::class)->name('profile');
 Route::get('/editprofile', \App\Http\Livewire\UserEditProfileComponent  ::class)->name('editprofile');
+Route::get('/googlemaps', \App\Http\Livewire\GoogleMaps  ::class)->name('googlemaps');
 
 //backend
 Route::get('/backend-page', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');
