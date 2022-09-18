@@ -89,10 +89,10 @@
           <span class="dropdown-item dropdown-header">{{$countNotif}} Pesanan Baru</span>
           @foreach ($pesanan as $item)
           <div class="dropdown-divider"></div>
-          <a href="{{ route('pesanan.index') }}" class="dropdown-item">
+          <a href="pesanan/detail/{{ $item->id }}" class="dropdown-item">
             <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }} <br>
             <i><small>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y H:i'); }}</small></i>
-            <span class="badge badge-success float-right text-sm">dipesan</span>
+            <span class="badge badge-info float-right text-sm">konfirmasi</span>
           </a>
           @endforeach
           
@@ -215,6 +215,14 @@
               <i class="nav-icon fas fa-dollar"></i>
               <p>
                 Pesanan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('ongkir.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-money"></i>
+              <p>
+                Konfigurasi Ongkir
               </p>
             </a>
           </li>
