@@ -2,30 +2,61 @@
     <main id="main" class="main-site">
 
 		<div class="container">
-			<div class="main-content-area">
+			<div class="main-content-area" wire:ignore>
                 <form wire:submit.prevent="placeOrder">
-				<div class="wrap-address-billing">
-					<h3 class="box-title">Alamat Penagihan</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="wrap-address-billing" style="width: 100%">
+                                <h3 class="box-title">Alamat Penagihan</h3>
 
-						<p class="row-in-form">
-							<label for="nama_lengkap">Nama Lengkap<span>*</span></label>
-							<input id="nama_lengkap" type="text" wire:model="nama_lengkap" placeholder="Masukan Nama Lengkap">
-						</p>
-						<p class="row-in-form pl-3">
-							<label for="email">Email Addreess:</label>
-							<input id="email" type="email" wire:model="email" placeholder="Masukan Email">
-						</p>
-						<p class="row-in-form">
-							<label for="nohp">No Handphone<span>*</span></label>
-							<input id="nohp" type="text" wire:model="nohp" placeholder="Masukan No Telepon">
-						</p>
-						<p class="row-in-form pl-3">
-							<label for="add">Alamat:</label>
-							<textarea wire:model="alamat" id="" class="form-control"></textarea>
-						</p>
+                                <div class="form-floating mb-3">
+
+                                    <input type="text" class="form-control" id="floatingNama nama_lengkap" wire:model="nama_lengkap" placeholder="Masukan Nama Lengkap">
+                                    <label for="floatingNama">Nama Lengkap</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input id="email floatingEmail" class="form-control" type="email" wire:model="email" placeholder="Masukan Email">
+                                    <label for="floatingEmail">Email</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input id="nohp floatingNoHp" type="text" class="form-control" wire:model="nohp" placeholder="Masukan No Telepon">
+                                    <label for="floatingNoHp">No Telepon</label>
+                                  </div>
+                                    <div id="pesan">
 
 
-				</div>
+                                            <form>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" id="start" placeholder="Jl. Mayjend Ahmad Yani" required>
+                                                    <label for="floatingLokasi">Lokasi</label>
+                                                  </div>
+
+
+                                                <div class="form-group">
+                                                    <!-- <label>Masukkan Lokasi Tujuan</label> -->
+                                                    <input type="hidden" class="form-control" id="end" placeholder="Jl. Semarang" required value="Erna Sari Catering, Waluya, Bandung Regency, West Java, Indonesia">
+                                                </div>
+                                                <input type="submit" class="btn btn-success mb-3" id="pesan-btn" value="Cek Ongkir">
+                                            </form>
+
+                                            <div id="detail">
+                                                <hr />
+                                                <h4>Detail Pesanan</h4>
+                                                Jarak : <p id="distance"></p>
+                                                Duration : <p id="duration"></p>
+                                                Ongkir : <p id="price"></p>
+
+                                            </div>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
 
 				<div class="summary summary-checkout">
 					<div class="summary-item payment-method">
@@ -50,6 +81,7 @@
                             @if(Session::has('checkout'))
                             <p class="summary-info grand-total"><span>Grand Total</span>
                                 @if($shipping and $pembayaran === 'COD')
+
                                 <span class="grand-total-price">Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}</span></p>
                                 @else
                                 <span class="grand-total-price">Rp.{{number_format((float)Session::get('checkout')['total'],3,'.','.')}}</span></p>
@@ -62,7 +94,7 @@
 						<h4 class="title-box f-title">Metode Pengiriman</h4>
 						<select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
                             <option value="0" selected="selected">Pilih Pengiriman</option>
-                            <option value="10000">Regular Pengiriman (Rp.10.000)</option>
+                            <option value="10000"><p id="price"></p></option>
                     </select>
 						<h4 class="title-box"><span class="title">Regular Pengiriman : Rp. {{number_format($shipping,0,'.','.')}}</span></h4>
 					</div>
