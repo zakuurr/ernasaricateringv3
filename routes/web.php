@@ -100,6 +100,14 @@ Route::prefix('laporan')->group(function () {
     Route::get('/show', [App\Http\Controllers\Backend\LaporanController::class, 'show'])->name('laporan.show');
 });
 
+// ongkir
+// Route::prefix('menu')->middleware('admin', 'auth')->group(function () {
+Route::prefix('ongkir')->group(function () {
+    Route::get('/', [App\Http\Controllers\Backend\OngkirController::class, 'index'])->name('ongkir.index');
+    Route::get('/search', [App\Http\Controllers\Backend\OngkirController::class, 'search'])->name('ongkir.search');
+    Route::get('/show', [App\Http\Controllers\Backend\OngkirController::class, 'show'])->name('ongkir.show');
+});
+
 
 // Loker
 // Route::prefix('loekr')->middleware('admin', 'auth')->group(function () {
