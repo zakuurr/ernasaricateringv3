@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Backend\Ongkir;
 
 class OngkirController extends Controller
 {
@@ -14,7 +16,10 @@ class OngkirController extends Controller
      */
     public function index()
     {
-        //
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $countNotif = count($pesanan);
+        $ongkir = Ongkir::all();
+        return view('backend/ongkir/index', compact('pesanan','countNotif','ongkir'));
     }
 
     /**
