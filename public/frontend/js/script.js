@@ -1,7 +1,7 @@
 var map;
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
-var harga = 1;
+var harga = 0.5;
 
 map = new google.maps.Map(document.getElementById('map'), {
     center: {
@@ -37,9 +37,9 @@ function findRoute() {
             // console.log(result.routes[0].legs[0].distance.value);
 
             document.getElementById('distance').innerHTML = result.routes[0].legs[0].distance.text;
-            document.getElementById('duration').innerHTML = result.routes[0].legs[0].duration.text;
-            document.getElementById('price').innerHTML = 'Rp' + result.routes[0].legs[0].distance.value *
-                harga;
+            // document.getElementById('duration').innerHTML = result.routes[0].legs[0].duration.text;
+            // document.getElementById('price').innerHTML = 'Rp' + result.routes[0].legs[0].distance.value *
+            //     harga;
 
             detail.style.display = 'block';
         } else {
