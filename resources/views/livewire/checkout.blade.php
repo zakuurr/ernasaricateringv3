@@ -2,7 +2,7 @@
     <main id="main" class="main-site">
 
 		<div class="container">
-			<div class="main-content-area" wire:ignore>
+			<div class="main-content-area">
                 <form wire:submit.prevent="placeOrder">
                     <div class="row">
                         <div class="col-md-6">
@@ -22,7 +22,7 @@
                                     <input id="nohp floatingNoHp" type="text" class="form-control" wire:model="nohp" placeholder="Masukan No Telepon">
                                     <label for="floatingNoHp">No Telepon</label>
                                   </div>
-                                    <div id="pesan">
+                                    {{-- <div id="pesan">
 
 
                                             <form>
@@ -48,13 +48,13 @@
 
                                             </div>
 
-                                    </div>
+                                    </div> --}}
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div id="map"></div>
-                        </div>
+                        </div> --}}
                     </div>
 
 
@@ -80,7 +80,7 @@
 
                             @if(Session::has('checkout'))
                             <p class="summary-info grand-total"><span>Grand Total</span>
-                                @if($shipping and $pembayaran === 'COD')
+                                @if($shipping and $pembayaran === 'Transfer')
 
                                 <span class="grand-total-price">Rp. {{ number_format($totalCartWithoutTax,0,'.','.')}}</span></p>
                                 @else
@@ -90,15 +90,6 @@
                             <button type="submit" class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Lakukan Pesanan Sekarang</button>
 					</div>
                     @if($pembayaran === 'COD')
-					<div class="summary-item shipping-method">
-						<h4 class="title-box f-title">Metode Pengiriman</h4>
-						<select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
-                            <option value="0" selected="selected">Pilih Pengiriman</option>
-                            <option value="10000"><p id="price"></p></option>
-                    </select>
-						<h4 class="title-box"><span class="title">Regular Pengiriman : Rp. {{number_format($shipping,0,'.','.')}}</span></h4>
-					</div>
-                    @elseif($pembayaran === 'Transfer')
                     <div class="summary-item shipping-method">
                         <h4 class="title-box f-title">Informasi Rekening</h4>
                         <div class="media">
@@ -108,6 +99,23 @@
                                 No. Rekening xxx atas nama <strong>xxx</strong>
                             </div>
                         </div>
+                        <h4 class="title-box f-title mt-3">Alamat Lengkap</h4>
+                        <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
+
+					</div>
+
+
+                    @elseif($pembayaran === 'Transfer')
+                    <div class="summary-item shipping-method">
+						<h4 class="title-box f-title">Metode Pengiriman</h4>
+						<select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
+                            <option value="0" selected="selected">Pilih Pengiriman</option>
+                            <option value="{{$ongkir[0]['harga_ongkir']}}">Rp {{$ongkir[0]['harga_ongkir']}}</p></option>
+                    </select>
+						<h4 class="title-box"><span class="title">Regular Pengiriman : Rp. {{number_format($shipping,0,'.','.')}}</span></h4>
+
+                        <h4 class="title-box f-title mt-3">Alamat Lengkap</h4>
+                        <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
 					</div>
 
                     @endif

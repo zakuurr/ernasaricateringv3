@@ -4,7 +4,10 @@
           <h2 class="text-center text-black">Pesanan Saya</h2>
         </div>
         <!-- /.card-header -->
-        @if(Cart::instance('cart')->count() > 0)
+        @if(Cart::instance('cart')->count() < 0)
+        <h1 class="text-center text-black">Tidak Ada Pesanan</h1>
+         @else
+
         <div class="card-body">
           {{-- <a href="{{ route('pesanan.create') }}" class="btn btn-success" style="margin-bottom:10px;">+ Tambah Menu</a> --}}
           <table id="example1" class="table table-bordered table-striped">
@@ -66,8 +69,7 @@
 
           </table>
         </div>
-        @else
-        <h1 class="text-center text-black">Tidak Ada Pesanan</h1>
+
         @endif
         <!-- /.card-body -->
       </div>
