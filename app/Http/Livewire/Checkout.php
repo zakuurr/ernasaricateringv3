@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Pesanan;
 use App\Models\Transaction;
+use App\Models\Backend\Ongkir;
 use App\Models\User;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -203,10 +204,14 @@ $this->resetCart();
                 'total' => ($items->qty * $items->price),
             ];
         });
+$ongkir = Ongkir::select('harga_ongkir')->get();
+
 
         $this->kode_unik = mt_rand(99,100);
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
         $this->verifyForCheckout();
-        return view('livewire.checkout')->layout('layouts.base');
+        return view('livewire.checkout',[
+            'ongkir' => $ongkir
+        ])->layout('layouts.base');
     }
 }
