@@ -35,7 +35,7 @@
               @if ($item->status == 0)
               <td><span class="badge badge-success">Tersedia</span></td>    
               @else
-              <td><span class="badge badge-danger">Tidak Tersedia</span></td>    
+              <td><span class="badge badge-danger">Sudah Terisi</span></td>    
               @endif
               
               <td>

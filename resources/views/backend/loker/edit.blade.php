@@ -1,6 +1,6 @@
 @extends('backend/layout-master')
 @section('title')
-    Lowongan Pekerjaan | Create
+    Lowongan Pekerjaan | Edit
 @endsection
 @section('content')
 <br>
