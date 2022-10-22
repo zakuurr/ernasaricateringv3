@@ -29,7 +29,9 @@ class OngkirController extends Controller
      */
     public function create()
     {
-        //
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $countNotif = count($pesanan);
+        return view('backend/ongkir/create',compact('pesanan','countNotif'));
     }
 
     /**
@@ -40,7 +42,14 @@ class OngkirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ongkir = Ongkir::create([
+            'jarak1'   => $request['jarak1'],
+            'jarak2'   => $request['jarak2'],
+            'harga_ongkir'   => $request['harga_ongkir'],
+        ]);
+
+        session()->flash('success', 'Data berhasil ditambahkan');
+        return redirect()->route('ongkir.index');
     }
 
     /**
@@ -62,7 +71,10 @@ class OngkirController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $countNotif = count($pesanan);
+        $ongkir = Ongkir::find($id);
+        return view('backend/ongkir/edit',compact('pesanan','countNotif','ongkir'));
     }
 
     /**
@@ -74,7 +86,15 @@ class OngkirController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ongkir = Ongkir::find($id);
+        $ongkir->update([
+            'jarak1'   => $request['jarak1'],
+            'jarak2'   => $request['jarak2'],
+            'harga_ongkir'   => $request['harga_ongkir'],
+        ]);
+
+        session()->flash('success', 'Data berhasil diubah');
+        return redirect()->route('ongkir.index');
     }
 
     /**
@@ -85,6 +105,11 @@ class OngkirController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ongkir = Ongkir::find($id);
+        $ongkir->delete();
+
+        session()->flash('success', 'Data berhasil dihapus');
+
+        return redirect()->back();
     }
 }

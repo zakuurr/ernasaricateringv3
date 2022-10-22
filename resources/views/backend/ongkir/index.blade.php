@@ -5,7 +5,6 @@
 @section('content')
       <!-- Content Wrapper. Contains page content -->
 
-
     <!-- /.content-header -->
     <div class="card">
       <div class="card-header">
@@ -13,7 +12,9 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <a href="{{ route('ongkir.create') }}" class="btn btn-success" style="margin-bottom:10px;">+ Tambah Ongkir</a>
+        <a href="{{ route('ongkir.create') }}" class="btn btn-success">
+          <i class="fa fa-plus"></i> Tambah data
+      </a> <br>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
@@ -28,11 +29,13 @@
             <tr>
               <td>{{ $key+1 }}</td>
               <td>{{ $item->jarak1 }} Km - {{ $item->jarak2 }} Km</td>
-              <td>Rp. {{ $item->harga_ongkir }}</td>
+              <td>Rp {{ number_format($item->harga_ongkir,0,'.','.') }}</td>
 
               <td>
                 <center>
-                  <a class="btn btn-info" href="{{ route('ongkir.edit', $item->id) }}" ><i class="fa fa-pencil"></i></a>
+                  <a href="{{ route('ongkir.edit', $item->id) }}" class="btn btn-info">
+                    <i class="fa fa-pencil"></i> 
+                </a>
                   <a class="btn btn-danger tombol-hapus" href="{{ route('ongkir.destroy', $item->id) }}"><i class="fas fa-trash" ></i></a>
                 </center>
               </td>
@@ -46,6 +49,8 @@
     </div>
     <!-- /.card -->
 
+   
+
     @section('js')
 <script>
 
@@ -57,7 +62,7 @@ const href =$(this).attr('href');
 
 Swal.fire({
 title: 'Apakah anda yakin ?',
-text: "Menu makanan ini akan dihapus",
+text: "Data ini akan dihapus",
 type: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#3085d6',
@@ -94,5 +99,20 @@ if (result.value) {
     });
   });
 </script>
+
+{{-- <script>
+  $('#edit').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var jarak1 = button.data('jarak1')
+    var jarak2 = button.data('jarak2')
+    var harga_ongkir = button.data('harga_ongkir')
+
+
+    var modal = $(this)
+    modal.find('.modal-body #jarak1').val(jarak1)
+    modal.find('.modal-body #jarak2').val(jarak2)
+    modal.find('.modal-body #harga_ongkir').val(harga_ongkir)
+  })
+</script> --}}
 @endsection
 @endsection

@@ -105,8 +105,12 @@ Route::prefix('laporan')->group(function () {
 // Route::prefix('menu')->middleware('admin', 'auth')->group(function () {
 Route::prefix('ongkir')->group(function () {
     Route::get('/', [App\Http\Controllers\Backend\OngkirController::class, 'index'])->name('ongkir.index');
-    Route::get('/search', [App\Http\Controllers\Backend\OngkirController::class, 'search'])->name('ongkir.search');
-    Route::get('/show', [App\Http\Controllers\Backend\OngkirController::class, 'show'])->name('ongkir.show');
+    Route::get('/create', [App\Http\Controllers\Backend\OngkirController::class, 'create'])->name('ongkir.create');
+    Route::post('/store', [App\Http\Controllers\Backend\OngkirController::class, 'store'])->name('ongkir.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'edit'])->name('ongkir.edit');
+    Route::get('/ditempati/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'ditempati'])->name('ongkir.ditempati');
+    Route::post('/update/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'update'])->name('ongkir.update');
+    Route::get('/destroy/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'destroy'])->name('ongkir.destroy');
 });
 
 
