@@ -14,7 +14,28 @@
       <div class="card-body">
         <a href="{{ route('ongkir.create') }}" class="btn btn-success">
           <i class="fa fa-plus"></i> Tambah data
-      </a> <br>
+      </a> <br><br>
+      <form action="{{ route('ongkir-flat.update', $ongkir_flat->id)  }}" method="POST">
+        @csrf
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="ongkir_flat">Ongkir Flat/Maksimal</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <input type="number" min="0" value="{{ $ongkir_flat->ongkir_flat }}" class="form-control" required id="ongkir_flat" name="ongkir_flat" >
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <button type="submit" class="btn btn-info">Ubah</button>
+            </div>
+          </div>
+       
+        </div>
+      </form>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>

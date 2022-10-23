@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Backend\Ongkir;
+use App\Models\Backend\OngkirFlat;
 
 class OngkirController extends Controller
 {
@@ -19,7 +20,8 @@ class OngkirController extends Controller
         $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         $ongkir = Ongkir::all();
-        return view('backend/ongkir/index', compact('pesanan','countNotif','ongkir'));
+        $ongkir_flat = OngkirFlat::first();
+        return view('backend/ongkir/index', compact('pesanan','countNotif','ongkir','ongkir_flat'));
     }
 
     /**
@@ -91,6 +93,24 @@ class OngkirController extends Controller
             'jarak1'   => $request['jarak1'],
             'jarak2'   => $request['jarak2'],
             'harga_ongkir'   => $request['harga_ongkir'],
+        ]);
+
+        session()->flash('success', 'Data berhasil diubah');
+        return redirect()->route('ongkir.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStoreFlat(Request $request, $id)
+    {
+        $ongkir = OngkirFlat::find($id);
+        $ongkir->update([
+            'ongkir_flat'   => $request['ongkir_flat'],
         ]);
 
         session()->flash('success', 'Data berhasil diubah');

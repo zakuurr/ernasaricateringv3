@@ -110,6 +110,7 @@ Route::prefix('ongkir')->group(function () {
     Route::get('/edit/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'edit'])->name('ongkir.edit');
     Route::get('/ditempati/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'ditempati'])->name('ongkir.ditempati');
     Route::post('/update/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'update'])->name('ongkir.update');
+    Route::post('/update-flat/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'updateStoreFlat'])->name('ongkir-flat.update');
     Route::get('/destroy/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'destroy'])->name('ongkir.destroy');
 });
 
