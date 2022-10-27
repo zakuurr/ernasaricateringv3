@@ -23,7 +23,7 @@
               <th>Alamat</th>
               <th>Status</th>
               <th>Tanggal Pesanan</th>
-              <th>Detail</th>
+              <th>Aksi</th>
             </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
                 <td>
                   <center>
                     <a class="btn btn-warning" href="{{ route('orders.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
-                    {{-- <a class="btn btn-danger tombol-hapus" href="{{ route('pesanan.destroy', $item->id) }}"><i class="fas fa-trash" ></i>Hapus</a> --}}
+                    <a class="btn btn-danger" href=""> Pesanan Diterima</a>
                   </center>
                 </td>
 

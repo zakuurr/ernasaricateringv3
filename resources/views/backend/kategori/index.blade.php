@@ -57,7 +57,7 @@ const href =$(this).attr('href');
 
 Swal.fire({
 title: 'Apakah anda yakin ?',
-text: "Menu makanan ini akan dihapus",
+text: "Kategori ini akan dihapus",
 type: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#3085d6',

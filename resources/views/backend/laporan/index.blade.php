@@ -31,7 +31,8 @@
                 <div class="form-group">
                     <label for="jenis_laporan">Jenis Laporan :</label> <br>
                     <input type="radio" name="jenis_laporan" value="rpenjualan" id="jenis_laporan"> Rekap Penjualan <br>
-                    <input type="radio" name="jenis_laporan" value="rpendapatan" id="jenis_laporan"> Rekap Pendapatan
+                    <input type="radio" name="jenis_laporan" value="rpendapatan" id="jenis_laporan"> Rekap Pendapatan <br>
+                    <input type="radio" name="jenis_laporan" value="rpendapatanongkir" id="jenis_laporan"> Rekap Pendapatan Ongkir
                 </div>
                 <div class="form-group">
                     <button type="submit" id="search" class="btn btn-success"><i class="fa fa-search"></i> Cari data</button>

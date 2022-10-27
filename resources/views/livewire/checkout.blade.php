@@ -106,9 +106,15 @@
                                 <option value="0" selected="selected">Pilih Pengiriman</option>
                                 <option value="{{$ongkir[0]['harga_ongkir']}}">< 10 KM Rp {{$ongkir[0]['harga_ongkir']}}</p></option>
                                 <option value="{{$ongkir[1]['harga_ongkir']}}"> > 10 KM Rp {{$ongkir[1]['harga_ongkir']}}</p></option>
-                        </select>
+                            </select>
                             <h4 class="title-box"><span class="title">Ongkir : Rp. {{number_format($shipping,0,'.','.')}}</span></h4>
-
+                            <div class="media">
+                                <img class="mr-3" src="{{ url('frontend/images/bri.png') }}" alt="Bank BRI" width="60">
+                                <div class="media-body">
+                                    <h5 class="mt-0">BANK BRI</h5>
+                                    No. Rekening xxx atas nama <strong>xxx</strong>
+                                </div>
+                            </div>
                             <h4 class="title-box f-title mt-3">Alamat Lengkap</h4>
                             <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
                         </div>
