@@ -63,7 +63,7 @@ if($this->shipping)
 
     $order = new Order();
     $order->user_id = Auth::user()->id;
-    $order->subtotal = session()->get('checkout')['subtotal'];
+    $order->subtotal = number_format((float)session()->get('checkout')['subtotal'],3,'','');
     $order->tax = session()->get('checkout')['tax'];
     $order->total = $this->totalCartWithoutTax;
 
@@ -73,7 +73,9 @@ if($this->shipping)
     $order->alamat = $this->alamat;
     $order->status = 'konfirmasi';
     $order->catatan = $this->catatan;
+    $order->ongkir = $this->shipping;
     $order->save();
+
 } else {
     $order = new Order();
     $order->user_id = Auth::user()->id;
@@ -87,6 +89,7 @@ if($this->shipping)
     $order->alamat = $this->alamat;
     $order->status = 'konfirmasi';
     $order->catatan = $this->catatan;
+    $order->ongkir = 0;
     $order->save();
 }
 
