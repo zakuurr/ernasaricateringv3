@@ -59,7 +59,12 @@
                 <td>
                   <center>
                     <a class="btn btn-warning" href="{{ route('orders.detail', $item->id) }}" ><font color="white"><i class="fa fa-eye"></i> Lihat detail</font></a>
-                    <a class="btn btn-danger" href=""> Pesanan Diterima</a>
+
+                    @if($item->status == 'sedang-dikirim')
+
+                    <button wire:click="destroy({{ $item->id }})" class="btn btn-sm btn-success"><font color="white"><i class="fa fa-check"></i> Pesanan Diterima</font></button>
+@endif
+
                   </center>
                 </td>
 

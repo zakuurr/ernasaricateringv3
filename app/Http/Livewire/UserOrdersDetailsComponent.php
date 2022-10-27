@@ -21,6 +21,7 @@ class UserOrdersDetailsComponent extends Component
         $order->canceled_date = DB::raw('CURRENT_DATE');
         $order->save();
     }
+
     public function render()
     {
         $pesanan = Order::where('user_id',Auth::user()->id)->where('id',$this->order_id)->first();
