@@ -113,19 +113,30 @@ class LaporanController extends Controller
             //Notifikasi
             $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
             $countNotif = count($pesanan);
-            $orderitem = Orderitem::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)->get();
+            $orderitem = Orderitem::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
+            ->get();
             
             return view('backend/laporan/rekap-penjualan', compact('orderitem','pesanan','countNotif'));
+        }elseif ($request->jenis_laporan == 'rpendapatan') {
+             //Notifikasi
+             $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+             $countNotif = count($pesanan);
+             $orderitem = Order::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
+             ->where('status','!=','konfirmasi')->where('status','!=','cancel')
+             ->get();
+ 
+ 
+             return view('backend/laporan/rekap-pendapatan', compact('orderitem','pesanan','countNotif'));
         }else{
             //Notifikasi
             $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
             $countNotif = count($pesanan);
             $orderitem = Order::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
-            ->where('status','dikirim')
+            ->where('status','!=','konfirmasi')->where('status','!=','cancel')
             ->get();
 
 
-            return view('backend/laporan/rekap-pendapatan', compact('orderitem','pesanan','countNotif'));
+            return view('backend/laporan/rekap-ongkir', compact('orderitem','pesanan','countNotif'));
         }
     }
 
