@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
+use App\Models\User;
 use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +15,45 @@ class Keranjang extends Component
 {
 
     public $shipping;
+    public $alamat;
     public $pembayaran;
     public $totalCartWithoutTax;
     public $totalWithTax;
     public $kode_unik;
+    public $nama_lengkap;
+    public $email;
+    public $nohp;
 
+    public function mount(){
+        if(!Auth::User())
+        {
+            return redirect()->route('login');
+        }
+
+        $this->nama_lengkap = Auth::user()->name;
+        $this->alamat = Auth::user()->alamat;
+        $this->email = Auth::user()->email;
+        $this->nohp = Auth::user()->nohp;
+    }
+
+    public function placeOrder() {
+
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->nohp = $this->nohp;
+        $user->alamat = $this->alamat;
+        $user->update();
+
+
+            $order = new Order();
+            $order->user_id = Auth::user()->id;
+            $order->jarak = 10;
+            $order->nohp = $this->nohp;
+            $order->alamat = $this->alamat;
+            $order->save();
+
+            return redirect()->route('checkout');
+
+    }
     public function increaseQuantity($rowId) {
 
         $menu = Cart::instance('cart')->get($rowId);
@@ -50,7 +86,7 @@ class Keranjang extends Component
         if(Auth::check())
         {
 
-            return redirect()->route('checkout');
+            return redirect()->route('penagihan');
         } else
         {
             return redirect()->route('login');

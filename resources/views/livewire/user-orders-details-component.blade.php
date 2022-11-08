@@ -105,7 +105,7 @@
                     </tr>
                     <tr>
                       <th>Ongkir</th>
-                      <td>Rp. 10.000</td>
+                      <td>{{$pesanan->ongkir}}</td>
                     </tr>
                     <tr>
                       <th>Total:</th>
@@ -160,7 +160,7 @@
                      @elseif ($pesanan->status == 6)
 
                      @endif --}}
-@if($pesanan->status == 'dipesan')
+@if($pesanan->status == 'konfirmasi')
                      <a href="{{ route('orders') }}" style="margin: 5px;" wire:click.prevent="cancelOrder" class="tombol-cancel btn btn-danger float-right"><i class="far fa-back"></i> Cancel Order </a>
 @endif
                 <a href="{{ route('orders') }}" style="margin: 5px;" class="btn btn-warning float-right"><i class="far fa-back"></i> Kembali </a>
