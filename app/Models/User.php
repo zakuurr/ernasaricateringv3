@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Kelurahan;
 
 class User extends Authenticatable
 {
@@ -58,4 +59,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    public function kelurahan()
+    {
+        return $this->BelongsTo(Kelurahan::class,'id_kelurahan');
+    }
 }

@@ -101,12 +101,16 @@
                   <table class="table">
                     <tr>
                       <th style="width:72%">Subtotal</th>
-                      <td>Rp. {{ number_format((float)$pesanan->subtotal,3,'.','.') }}</td>
+                      <td>Rp. {{ number_format((float)$pesanan->subtotal,0,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Ongkir</th>
-                      <td>{{$pesanan->ongkir}}</td>
+                      <td>Rp. {{ number_format((float)$pesanan->ongkir,0,'.','.')}}</td>
                     </tr>
+                    <tr>
+                        <th>Kode Unik</th>
+                        <td>Rp. {{ number_format((float)$pesanan->kode_unik,0,'.','.')}}</td>
+                      </tr>
                     <tr>
                       <th>Total:</th>
                       <td><b> Rp. {{ number_format((float)$pesanan->total,0,'.','.') }}</b></td>

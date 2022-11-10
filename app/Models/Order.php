@@ -25,4 +25,9 @@ class Order extends Model
     public function transaction() {
         return $this->hasOne(Transaction::class);
     }
+
+    public function kelurahan()
+    {
+        return $this->BelongsTo(Kelurahan::class,'id_kelurahan');
+    }
 }
