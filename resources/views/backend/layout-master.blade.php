@@ -72,7 +72,7 @@
           <a href="pesanan/detail/{{ $item->id }}" class="dropdown-item">
             <i class="fa fa-cutlery mr-2"></i> {{ $item->nama_lengkap }} <br>
             <i><small>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y H:i'); }}</small></i>
-            <span class="badge badge-info float-right text-sm">konfirmasi</span>
+            <span class="badge badge-info float-right text-sm">Konfirmasi</span>
           </a>
           @endforeach
           
@@ -193,6 +193,14 @@
               <i class="nav-icon fas fa-money"></i>
               <p>
                 Konfigurasi Ongkir
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('bank.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Konfigurasi Bank
               </p>
             </a>
           </li>

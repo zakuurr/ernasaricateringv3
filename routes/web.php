@@ -110,10 +110,20 @@ Route::prefix('ongkir')->group(function () {
     Route::get('/create', [App\Http\Controllers\Backend\OngkirController::class, 'create'])->name('ongkir.create');
     Route::post('/store', [App\Http\Controllers\Backend\OngkirController::class, 'store'])->name('ongkir.store');
     Route::get('/edit/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'edit'])->name('ongkir.edit');
-    Route::get('/ditempati/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'ditempati'])->name('ongkir.ditempati');
     Route::post('/update/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'update'])->name('ongkir.update');
     Route::post('/update-flat/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'updateStoreFlat'])->name('ongkir-flat.update');
     Route::get('/destroy/{id}', [App\Http\Controllers\Backend\OngkirController::class, 'destroy'])->name('ongkir.destroy');
+});
+
+// bank
+// Route::prefix('bank')->middleware('admin', 'auth')->group(function () {
+Route::prefix('bank')->group(function () {
+    Route::get('/', [App\Http\Controllers\Backend\BankController::class, 'index'])->name('bank.index');
+    Route::get('/create', [App\Http\Controllers\Backend\BankController::class, 'create'])->name('bank.create');
+    Route::post('/store', [App\Http\Controllers\Backend\BankController::class, 'store'])->name('bank.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\Backend\BankController::class, 'edit'])->name('bank.edit');
+    Route::post('/update/{id}', [App\Http\Controllers\Backend\BankController::class, 'update'])->name('bank.update');
+    Route::get('/destroy/{id}', [App\Http\Controllers\Backend\BankController::class, 'destroy'])->name('bank.destroy');
 });
 
 
