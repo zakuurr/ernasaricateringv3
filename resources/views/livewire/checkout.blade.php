@@ -3,33 +3,9 @@
 
 		<div class="container">
 			<div class="main-content-area">
-                <div id="pesan" wire:ignore>
-                    <form wire:ignore>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="start" placeholder="Jl. Mayjend Ahmad Yani" wire:ignore>
-                            <label for="floatingLokasi">Lokasi</label>
-                          </div>
-
-
-                        <div class="form-group">
-                            <!-- <label>Masukkan Lokasi Tujuan</label> -->
-                            <input type="hidden" class="form-control" id="end" placeholder="Jl. Semarang" value="Erna Sari Catering, Waluya, Bandung Regency, West Java, Indonesia" wire:ignore>
-                        </div>
-                        <input type="submit" class="btn btn-success mb-3" id="pesan-btn" value="Cek Jarak" wire:ignore>
-                    </form>
-
-                    <div id="detail" wire:ignore>
-                        <hr />
-                        <h4 class="title-box f-title text-black">Detail Pesanan</h4>
-                        <p class="text-blacl"> Jarak : </p><p id="distance" wire:ignore class="text-black"></p>
-                        {{-- Duration : <p id="duration"></p>
-                        Ongkir : <p id="price"></p> --}}
-
-                    </div>
-            </div>
                 <form wire:submit.prevent="placeOrder">
-                    <div class="row">
-                        <div class="col-md-6">
+                    {{-- <div class="row">
+                        <div class="col-md-12">
                             <div class="wrap-address-billing" style="width: 100%">
                                 <h3 class="box-title">Alamat Penagihan</h3>
 
@@ -51,15 +27,18 @@
                                     <label for="floatingAlamat">Alamat Lengkap</label>
                                   </div>
 
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
+                                    <label for="floatingNoHp">Alamat Lengkap</label>
+                                  </div>
+
 
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div id="map" ></div>
-                        </div>
-                    </div>
+                    </div> --}}
                     <div class="summary summary-checkout">
                         <div class="summary-item payment-method">
+
                             <h4 class="title-box">Metode Pembayaran</h4>
                             <div class="choose-payment-methods">
                                 <label class="payment-method">
@@ -118,10 +97,17 @@
                         @elseif($pembayaran === 'Transfer')
                         <div class="summary-item shipping-method">
                             <h4 class="title-box f-title">Metode Pengiriman</h4>
+
                             <select class="title index float-right inline-block block text-gray-600 w-full text-sm form-control" wire:model="shipping" id="">
                                 <option value="0" selected="selected">Pilih Pengiriman</option>
-                                <option value="{{$ongkir[0]['harga_ongkir']}}">< 10 KM Rp {{$ongkir[0]['harga_ongkir']}}</p></option>
-                                <option value="{{$ongkir[1]['harga_ongkir']}}"> > 10 KM Rp {{$ongkir[1]['harga_ongkir']}}</p></option>
+
+
+                                @if($a['jarak'] === '10')
+                                    <option value="{{$ongkir[0]['harga_ongkir']}}">< 10 KM Rp {{$ongkir[0]['harga_ongkir']}}</p></option>
+                                @else
+                                    <option value="{{$ongkir[1]['harga_ongkir']}}"> > 10 KM Rp {{$ongkir[1]['harga_ongkir']}}</p></option>
+                                @endif
+
                             </select>
                             <h4 class="title-box"><span class="title">Ongkir : Rp. {{number_format($shipping,0,'.','.')}}</span></h4>
                             <div class="media">

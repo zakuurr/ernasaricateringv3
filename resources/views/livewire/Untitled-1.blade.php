@@ -10,33 +10,37 @@
 
         <div class="card-body">
           {{-- <a href="{{ route('pesanan.create') }}" class="btn btn-success" style="margin-bottom:10px;">+ Tambah Menu</a> --}}
-          <table id="example1" class="table table-responsive table-hover">
-            <thead>
-            <tr>
-
-              <th>ID Pesanan</th>
-              <th>Sub total</th>
-              <th>Total</th>
-              <th>Nama Lengkap</th>
-
-
-              <th>Status</th>
-              <th>Tanggal Pesanan</th>
-              <th>Aksi</th>
-            </tr>
-            </thead>
+          <table id="example1" class="table table-bordered table-striped table-responsive">
             <tbody>
               @foreach ($pesanan as $key => $item)
               <tr>
-
+                <td>ID Pesanan :</td>
                 <td>{{ $item->id }}</td>
-                <td>Rp. {{ number_format($item->subtotal,0,'.','.') }}</td>
-                <td>Rp. {{ number_format($item->total,0,'.','.') }}</td>
+              </tr>
+              <tr>
+                <td>{{ $item->subtotal }}</td>
+              </tr>
+              <tr>
+                <td>{{ $item->total }}</td>
+              </tr>
+              <tr>
                 <td>{{ $item->nama_lengkap }}</td>
-
-
-                <td><span class="badge badge-warning">{{ $item->status }}</span></td>
+              </tr>
+                <tr>
+                <td>{{ $item->email }}</td>
+                </tr>
+                <tr>
+                <td>{{ $item->nohp }}</td>
+                </tr>
+                <tr>
+                <td>{{ $item->alamat }}</td>
+                </tr>
+                <tr>
+                <td>{{ $item->status }}</td>
+                </tr>
+                <tr>
                 <td>{{ $item->created_at }}</td>
+                </tr>
                 {{-- <td>
                   @if($item->status == 1)
                   <span class="badge badge-danger"> Belum Bayar </span>

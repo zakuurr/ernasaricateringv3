@@ -35,9 +35,9 @@
                     <li>
                       <a href="{{ route('keranjang')}}" class="site-cart">
                         <span class="icon icon-shopping_cart"></span>
-                        @if(Cart::instance('cart')->count() > 0)
-                        <span class="count">{{Cart::instance('cart')->count()}}</span>
-                        @endif
+                            @if(Cart::instance('cart')->count() > 0)
+                                <span class="count">{{Cart::instance('cart')->count()}}</span>
+                         @endif
                       </a>
                     </li>
                     <li>
@@ -49,7 +49,7 @@
                       </li>
 
                       <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
@@ -101,16 +101,16 @@
     <nav class="site-navigation text-right text-md-center" role="navigation">
       <div class="container">
         <ul class="site-menu js-clone-nav d-none d-md-block">
-          <li class="active">
+          <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}">
             <a href="{{url('/')}}">Beranda</a>
           </li>
-          <li class="">
+          <li class={{ Request::segment(1) === 'about' ? 'active' : null }}>
             <a href="{{url('/about')}}">Tentang Kami</a>
 
           </li>
-          <li><a href="{{url('/list-menu')}}">Daftar Menu</a></li>
-          <li><a href="{{url('/kontak')}}">Kontak Kami</a></li>
-          <li><a href="{{url('/info-loker')}}">Lowongan Kerja</a></li>
+          <li class="{{ Request::segment(1) === 'list-menu' ? 'active' : null }}"><a href="{{url('/list-menu')}}">Daftar Menu</a></li>
+          <li class="{{ Request::segment(1) === 'kontak' ? 'active' : null }}"><a href="{{url('/kontak')}}">Kontak Kami</a></li>
+          <li class="{{ Request::segment(1) === 'loker' ? 'active' : null }}"><a href="{{url('/info-loker')}}">Lowongan Kerja</a></li>
         </ul>
       </div>
     </nav>

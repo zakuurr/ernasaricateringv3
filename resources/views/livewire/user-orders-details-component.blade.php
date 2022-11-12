@@ -101,12 +101,16 @@
                   <table class="table">
                     <tr>
                       <th style="width:72%">Subtotal</th>
-                      <td>Rp. {{ number_format((float)$pesanan->subtotal,3,'.','.') }}</td>
+                      <td>Rp. {{ number_format((float)$pesanan->subtotal,0,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Ongkir</th>
-                      <td>Rp. 10.000</td>
+                      <td>Rp. {{ number_format((float)$pesanan->ongkir,0,'.','.')}}</td>
                     </tr>
+                    <tr>
+                        <th>Kode Unik</th>
+                        <td>Rp. {{ number_format((float)$pesanan->kode_unik,0,'.','.')}}</td>
+                      </tr>
                     <tr>
                       <th>Total:</th>
                       <td><b> Rp. {{ number_format((float)$pesanan->total,0,'.','.') }}</b></td>
@@ -160,7 +164,7 @@
                      @elseif ($pesanan->status == 6)
 
                      @endif --}}
-@if($pesanan->status == 'dipesan')
+@if($pesanan->status == 'konfirmasi')
                      <a href="{{ route('orders') }}" style="margin: 5px;" wire:click.prevent="cancelOrder" class="tombol-cancel btn btn-danger float-right"><i class="far fa-back"></i> Cancel Order </a>
 @endif
                 <a href="{{ route('orders') }}" style="margin: 5px;" class="btn btn-warning float-right"><i class="far fa-back"></i> Kembali </a>

@@ -165,13 +165,15 @@
           {{$slot}}
         </main>
 
-        <footer class="site-footer border-top" style="background-image : url('{{asset('/frontend/images/footer_background.jpg')}}')">
+        <footer class="site-footer border-top" style="
+        background-image : url('{{asset('/frontend/images/footer_background.jpg')}}')"
+        >
             <div class="container">
                     <div class="row">
                       <div class="logo-footer col-md-4">
                         <img class="img-fluid" src="{{ asset('')}}frontend/images/logoerna.png" alt="Yellowfitkitchen logo" style="width: 50%"/>
                       </div>
-                      <div class="text-footer col-md-4 text-center">
+                      <div class="text-footer col-md-4 text-center mt-5">
                         <p class="text-white"><span class="fw-bold text-white">© 2022 - ERNA SARI GROUP</span> <br />
                           All Rights Reserved powered by <a class="fw-bold text-decoration-none" href="">ernasaricatering.com</a><br>
                           {{-- <div class="fw-bold">
@@ -180,7 +182,7 @@
                           </div> --}}
                         </p>
                       </div>
-                            <div class="text-footer col-md-4 text-center">
+                            <div class="text-footer col-md-4 text-center mt-5">
                                 <p class="text-white"><span class="fw-bold text-white">INFO KONTAK</span> <br />
                                     <div class="block-5 mb-5" style="color: #d49701">
                                         <ul class="list-unstyled" style="color: #d49701">

@@ -22,7 +22,7 @@ class Checkout extends Component
     public $totalCartWithoutTax;
     public $totalWithTax;
     public $kode_unik;
-
+    public $orderId;
     public $cod;
     public $catatan;
     public $tf;
@@ -30,6 +30,7 @@ class Checkout extends Component
     public $email;
     public $nohp;
     public $alamat;
+    public $jarak;
     public $thankyou;
 
 
@@ -43,6 +44,17 @@ class Checkout extends Component
 
         ]);
     }
+    // public function cekOngkir() {
+    //     if($this->alamat == 'cicalengka'){
+    //         $order = new Order();
+    //         $order->jarak = 10;
+    //         $order->save();
+    //     } else {
+    //         $order = new Order();
+    //         $order->jarak = 10;
+    //         $order->save();
+    //     }
+    // }
 public function placeOrder() {
         $this->validate([
             'nama_lengkap' => 'required',
@@ -60,37 +72,41 @@ public function placeOrder() {
 
 if($this->shipping)
 {
-
-    $order = new Order();
+    $orderId = Order::latest()->first()->id;
+    $order = Order::where('id',$orderId)->first();
     $order->user_id = Auth::user()->id;
     $order->subtotal = number_format((float)session()->get('checkout')['subtotal'],3,'','');
-    $order->tax = session()->get('checkout')['tax'];
     $order->total = $this->totalCartWithoutTax;
 
     $order->nama_lengkap = $this->nama_lengkap;
     $order->email = $this->email;
     $order->nohp = $this->nohp;
+
     $order->alamat = $this->alamat;
     $order->status = 'konfirmasi';
+    $order->kode_unik = $this->kode_unik;
     $order->catatan = $this->catatan;
     $order->ongkir = $this->shipping;
-    $order->save();
+    $order->update();
 
 } else {
     $order = new Order();
     $order->user_id = Auth::user()->id;
     $order->subtotal = session()->get('checkout')['subtotal'];
-    $order->tax = session()->get('checkout')['tax'];
     $order->total = session()->get('checkout')['total'];
 
     $order->nama_lengkap = $this->nama_lengkap;
     $order->email = $this->email;
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
+
     $order->status = 'konfirmasi';
     $order->catatan = $this->catatan;
+    $order->kode_unik = $this->kode_unik;
     $order->ongkir = 0;
     $order->save();
+
+    $this->resetCart();
 }
 
         foreach(Cart::instance('cart')->content() as $item){
@@ -111,7 +127,7 @@ if($this->shipping)
             // $transaction->status = 'pending';
             // $transaction->save();
             $this->makeTransaction($order->id,'pending');
-$this->resetCart();
+        $this->resetCart();
         } else if($this->pembayaran == 'Transfer')
         {
             // $transaction = new Transaction();
@@ -123,7 +139,7 @@ $this->resetCart();
             $this->makeTransaction($order->id,'pending');
             $this->resetCart();
         }
-
+        $this->resetCart();
         $this->sendOrderConfirmationMail($order);
 
     }
@@ -208,13 +224,14 @@ $this->resetCart();
             ];
         });
 $ongkir = Ongkir::select('harga_ongkir')->get();
-
+$a = Order::select('jarak')->get()->first();
 
         $this->kode_unik = mt_rand(99,100);
-        $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
+        $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping + $this->kode_unik;
         $this->verifyForCheckout();
         return view('livewire.checkout',[
-            'ongkir' => $ongkir
+            'ongkir' => $ongkir,
+            'a' => $a
         ])->layout('layouts.base');
     }
 }

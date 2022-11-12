@@ -75,10 +75,26 @@
                             {{-- @endif --}}
                         </b></p>
 					</div>
-					<div class="checkout-info">
-						<a class="btn btn-checkout text-black" wire:click.prevent="checkout" style="background-color: #d49701; :color : black">Check out</a>
+                    <form wire:submit.prevent="placeOrder">
+                        <div class="summary mt-3">
+                            <div class="order-summary">
+                                <h4 class="title-box">DETAIL PENAGIHAN</h4>
+                                <div class="form-floating mb-3">
+                                    <input id="nohp floatingNoHp" type="text" class="form-control" wire:model="nohp" placeholder="Masukan No Telepon">
+                                    <label for="floatingNoHp">No Telepon</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
+                                    <label for="floatingNoHp">Alamat Lengkap</label>
+                                  </div>
+                                </div>
+                        </div>
+                    <div class="checkout-info">
+                        <button type="submit" class="btn btn-checkout text-black" style="background-color: #d49701; :color : black">Check out</button>
 						<a class="link-to-shop" href="{{route('list-menu')}}">Lanjutkan Belanja<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 					</div>
+                </form>
+
 					<div class="update-clear">
 						<a  wire:click.prevent="destroyAll()" class="btn btn-sm text-black" style="background-color: #d49701; :color : black">Kosongkan Keranjang</a>
 						{{-- \ --}}

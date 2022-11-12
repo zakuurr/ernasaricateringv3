@@ -19,6 +19,7 @@ Route::get('/about', \App\Http\Livewire\About::class);
 Route::get('/list-menu/{slug}', \App\Http\Livewire\MenuDetail::class)->name('menu.detail');
 Route::get('/keranjang', \App\Http\Livewire\Keranjang::class)->name('keranjang');
 Route::get('/checkout', \App\Http\Livewire\Checkout::class)->name('checkout');
+Route::get('/penagihan', \App\Http\Livewire\Penagihan::class)->name('penagihan');
 Route::get('/history', \App\Http\Livewire\History::class)->name('history');
 Route::get('/info-loker', \App\Http\Livewire\Loker::class)->name('loker');
 Route::get('/info-loker/{id}', \App\Http\Livewire\LokerDetail::class)->name('loker.detail');
