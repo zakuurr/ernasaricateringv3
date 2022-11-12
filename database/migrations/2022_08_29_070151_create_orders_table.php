@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->text('alamat')->nullable();
             $table->text('alamat2')->nullable();
-            $table->enum('status',['konfirmasi','diproses','sedang-dikirim','pesanan-diterima','cancel'])->default('dipesan');
+            $table->enum('status',['menunggu-pembayaran','diproses','sedang-dikirim','pesanan-diterima','cancel'])->default('dipesan');
             $table->boolean('is_shipping_different')->default(false);
             $table->timestamps();
 

@@ -83,7 +83,7 @@ if($this->shipping)
     $order->nohp = $this->nohp;
 
     $order->alamat = $this->alamat;
-    $order->status = 'konfirmasi';
+    $order->status = 'menunggu-pembayaran';
     $order->kode_unik = $this->kode_unik;
     $order->catatan = $this->catatan;
     $order->ongkir = $this->shipping;
@@ -100,7 +100,7 @@ if($this->shipping)
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
 
-    $order->status = 'konfirmasi';
+    $order->status = 'menunggu-pembayaran';
     $order->catatan = $this->catatan;
     $order->kode_unik = $this->kode_unik;
     $order->ongkir = 0;
