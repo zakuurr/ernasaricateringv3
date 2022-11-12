@@ -46,6 +46,10 @@
                                     <input id="nohp floatingNoHp" type="text" class="form-control" wire:model="nohp" placeholder="Masukan No Telepon">
                                     <label for="floatingNoHp">No Telepon</label>
                                   </div>
+                                  <div class="form-floating mb-3">
+                                    <textarea id="alamat floatingAlamat"class="form-control" wire:model="alamat" placeholder="Masukan Alamat"></textarea>
+                                    <label for="floatingAlamat">Alamat Lengkap</label>
+                                  </div>
 
 
                             </div>
@@ -90,11 +94,23 @@
                                 <img class="mr-3" src="{{ url('frontend/images/bri.png') }}" alt="Bank BRI" width="60">
                                 <div class="media-body">
                                     <h5 class="mt-0">BANK BRI</h5>
-                                    No. Rekening xxx atas nama <strong>xxx</strong>
+                                    No. Rekening 377101042772530 atas nama <strong>Wita Lelasari</strong>
                                 </div>
                             </div>
-                            <h4 class="title-box f-title mt-3">Alamat Lengkap</h4>
-                            <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
+                            <div class="media">
+                                <img class="mr-3" src="{{ url('frontend/images/bjb.png') }}" alt="Bank BRI" width="60">
+                                <div class="media-body">
+                                    <h5 class="mt-0">BANK BJB</h5>
+                                    No. Rekening 0102214471100 atas nama <strong>Wita Lelasari</strong>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <img class="mr-3" src="{{ url('frontend/images/dana.png') }}" alt="Bank BRI" width="60">
+                                <div class="media-body">
+                                    <h5 class="mt-0">DANA</h5>
+                                    No. Telepon 081289464544 atas nama <strong>Wita Lelasari</strong>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -112,11 +128,23 @@
                                 <img class="mr-3" src="{{ url('frontend/images/bri.png') }}" alt="Bank BRI" width="60">
                                 <div class="media-body">
                                     <h5 class="mt-0">BANK BRI</h5>
-                                    No. Rekening xxx atas nama <strong>xxx</strong>
+                                    No. Rekening 377101042772530 atas nama <strong>Wita Lelasari</strong>
                                 </div>
                             </div>
-                            <h4 class="title-box f-title mt-3">Alamat Lengkap</h4>
-                            <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
+                            <div class="media">
+                                <img class="mr-3" src="{{ url('frontend/images/bjb.png') }}" alt="Bank BRI" width="60">
+                                <div class="media-body">
+                                    <h5 class="mt-0">BANK BJB</h5>
+                                    No. Rekening 0102214471100 atas nama <strong>Wita Lelasari</strong>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <img class="mr-3" src="{{ url('frontend/images/dana.png') }}" alt="Bank BRI" width="60">
+                                <div class="media-body">
+                                    <h5 class="mt-0">DANA</h5>
+                                    No. Telepon 081289464544 atas nama <strong>Wita Lelasari</strong>
+                                </div>
+                            </div>
                         </div>
 
                         @endif
