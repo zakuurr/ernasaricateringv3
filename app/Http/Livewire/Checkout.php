@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\OrderMail;
+use App\Models\Backend\Bank;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Pesanan;
@@ -14,9 +15,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class Checkout extends Component
 {
+    use WithFileUploads;
     public $shipping;
     public $pembayaran;
     public $totalCartWithoutTax;
@@ -32,6 +36,8 @@ class Checkout extends Component
     public $alamat;
     public $jarak;
     public $thankyou;
+    public $newImage;
+    public $foto;
 
 
     public function updated($fields) {
@@ -83,10 +89,21 @@ if($this->shipping)
     $order->nohp = $this->nohp;
 
     $order->alamat = $this->alamat;
-    $order->status = 'menunggu-pembayaran';
+    $order->status = 'menunggu-konfirmasi';
     $order->kode_unik = $this->kode_unik;
     $order->catatan = $this->catatan;
     $order->ongkir = $this->shipping;
+
+    if($this->newImage)
+    {
+        if($this->foto)
+        {
+            unlink('storage/fototransfer/'.$this->foto);
+        }
+        $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
+        $this->newImage->storeAs('storage/fototransfer/',$imageName,'real_public');
+        $order->foto = $imageName;
+    }
     $order->update();
 
 } else {
@@ -100,7 +117,7 @@ if($this->shipping)
     $order->nohp = $this->nohp;
     $order->alamat = $this->alamat;
 
-    $order->status = 'menunggu-pembayaran';
+    $order->status = 'menunggu-konfirmasi';
     $order->catatan = $this->catatan;
     $order->kode_unik = $this->kode_unik;
     $order->ongkir = 0;
@@ -225,13 +242,15 @@ if($this->shipping)
         });
 $ongkir = Ongkir::select('harga_ongkir')->get();
 $a = Order::select('jarak')->get()->first();
+$bank = Bank::all();
 
         $this->kode_unik = mt_rand(99,100);
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping + $this->kode_unik;
         $this->verifyForCheckout();
         return view('livewire.checkout',[
             'ongkir' => $ongkir,
-            'a' => $a
+            'a' => $a,
+            'bank' => $bank,
         ])->layout('layouts.base');
     }
 }

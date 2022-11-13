@@ -21,7 +21,7 @@ class PesananController extends Controller
     public function index()
     {
         $pesananOr = Order::orderBy('created_at','DESC')->get();
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/pesanan/index', compact('pesanan','pesananOr','countNotif'));
@@ -35,7 +35,7 @@ class PesananController extends Controller
     public function updateOrderStatus($id,$status) {
         $order = Order::find($id);
         $order->status = $status;
-        if($status == "dikirim")
+        if($status == "sedang-dikirim")
         {
             $order->delivered_date = DB::raw('CURRENT_DATE');
         }else if($status == "cancel"){
@@ -78,7 +78,7 @@ class PesananController extends Controller
         $user = User::find($pesananOr->user_id);
         // $detailPesan = PesananDetail::where('pesanan_id','=',$pesanan->id)->get();
         $tanggal = Carbon::parse($pesananOr->created_at)->translatedFormat('d F Y');
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/pesanan/detail',compact('pesanan','user','tanggal','pesananOr','countNotif'));

@@ -80,8 +80,12 @@
                             <div class="order-summary">
                                 <h4 class="title-box">DETAIL PENAGIHAN</h4>
                                 <div class="form-floating mb-3">
-                                    <input id="nohp floatingNoHp" type="text" class="form-control" wire:model="nohp" placeholder="Masukan No Telepon">
-                                    <label for="floatingNoHp">No Telepon</label>
+                                    <input type="text" class="form-control" id="floatingNama alamat" wire:model="kecamatan" placeholder="Masukan Alamat Lengkap">
+                                    <label for="floatingNoHp">Kecamatan</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingNama alamat" wire:model="kelurahan" placeholder="Masukan Alamat Lengkap">
+                                    <label for="floatingNoHp">Desa / Kelurahan</label>
                                   </div>
                                   <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">

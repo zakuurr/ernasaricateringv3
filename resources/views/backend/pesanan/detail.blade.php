@@ -111,7 +111,7 @@
                     </tr>
                     <tr>
                       <th>Ongkir</th>
-                      <td>Rp. 10.000</td>
+                      <td>Rp. {{ number_format((float)$pesananOr->ongkir,3,'.','.') }}</td>
                     </tr>
                     <tr>
                       <th>Total:</th>
