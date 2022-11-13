@@ -8,9 +8,11 @@
         <h1 class="text-center text-black">Tidak Ada Pesanan</h1>
          @else
 
-        <div class="card-body">
+        <div class="card-body justify-content-center">
           {{-- <a href="{{ route('pesanan.create') }}" class="btn btn-success" style="margin-bottom:10px;">+ Tambah Menu</a> --}}
-          <table id="example1" class="table table-responsive table-hover">
+
+
+          <table id="example1" class="align-item-center justify-content-center table table-responsive table-hover">
             <thead>
             <tr>
 
@@ -18,8 +20,6 @@
               <th>Sub total</th>
               <th>Total</th>
               <th>Nama Lengkap</th>
-
-
               <th>Status</th>
               <th>Tanggal Pesanan</th>
               <th>Aksi</th>

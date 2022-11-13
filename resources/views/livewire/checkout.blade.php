@@ -132,6 +132,7 @@
                                 @if($pembayaran === 'Transfer')
                                 <h4 class="title-box f-title mb-3">Upload Bukti Pembayaran</h4>
                                 <input type="file" class="form-control" wire:model="newImage"/>
+                                @error('newImage') <span class="text-danger">{{ $message }}</span> @enderror
 @endif
                                 <button type="submit" class="btn btn-checkout text-black mt-4" style="background-color: #d49701; :color : black">Lakukan Pesanan Sekarang</button>
                         </div>

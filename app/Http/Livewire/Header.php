@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +20,10 @@ class Header extends Component
     public function updateKeranjang()
     {
         if(Auth::user()){
-            $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
+            $pesanan = Order::where('user_id',Auth::user()->id)->where('status','menunggu-konfirmasi')->first();
             if($pesanan)
             {
-                $this->jumlah = PesananDetail::where('pesanan_id',$pesanan->id)->count();
+                $this->jumlah = OrderItem::where('order_id',$pesanan->id)->count();
             } else{
                 $this-> jumlah = 0;
             }
@@ -32,10 +34,10 @@ class Header extends Component
     public function mount()
     {
         if(Auth::user()){
-            $pesanan = Pesanan::where('user_id',Auth::user()->id)->where('status',0)->first();
+            $pesanan = Order::where('user_id',Auth::user()->id)->where('status','menunggu-konfirmasi')->first();
             if($pesanan)
             {
-                $this->jumlah = PesananDetail::where('pesanan_id',$pesanan->id)->count();
+                $this->jumlah = OrderItem::where('order_id',$pesanan->id)->count();
             }
         }
 

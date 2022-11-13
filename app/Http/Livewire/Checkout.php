@@ -47,6 +47,7 @@ class Checkout extends Component
             'nohp' => 'required',
             'alamat' => 'required',
             'pembayaran' => 'required',
+            'newImage' => 'required|image|mimes:jpg,jpeg,png,svg,gif|max:2048'
 
         ]);
     }
@@ -68,11 +69,13 @@ public function placeOrder() {
             'nohp' => 'required',
             'alamat' => 'required',
             'pembayaran' => 'required',
+            'newImage' => 'required | image | max:1024'
 
         ]);
 
         $user = User::where('id',Auth::user()->id)->first();
         $user->nohp = $this->nohp;
+        $user->email = $this->email;
         $user->alamat = $this->alamat;
         $user->update();
 
@@ -93,17 +96,11 @@ if($this->shipping)
     $order->kode_unik = $this->kode_unik;
     $order->catatan = $this->catatan;
     $order->ongkir = $this->shipping;
+    $filename = $this->newImage->getClientOriginalName();
+    $this->newImage->storeAs('storage/fototransfer/', $filename);
 
-    if($this->newImage)
-    {
-        if($this->foto)
-        {
-            unlink('storage/fototransfer/'.$this->foto);
-        }
-        $imageName = Carbon::now()->timestamp . '.' . $this->newImage->extension();
-        $this->newImage->storeAs('storage/fototransfer/',$imageName,'real_public');
-        $order->foto = $imageName;
-    }
+    $order->foto = $filename;
+
     $order->update();
 
 } else {
@@ -123,7 +120,6 @@ if($this->shipping)
     $order->ongkir = 0;
     $order->save();
 
-    $this->resetCart();
 }
 
         foreach(Cart::instance('cart')->content() as $item){
@@ -156,7 +152,7 @@ if($this->shipping)
             $this->makeTransaction($order->id,'pending');
             $this->resetCart();
         }
-        $this->resetCart();
+
         $this->sendOrderConfirmationMail($order);
 
     }
@@ -168,6 +164,7 @@ if($this->shipping)
 
     public function sendOrderConfirmationMail($order) {
         Mail::to($order->email)->send(new OrderMail($order));
+        $this->resetCart();
     }
 
     public function makeTransaction($order_id,$status) {
@@ -177,6 +174,8 @@ if($this->shipping)
             $transaction->mode = $this->pembayaran;
             $transaction->status = $status;
             $transaction->save();
+
+            $this->resetCart();
     }
 
     public function verifyForCheckout() {
@@ -247,6 +246,7 @@ $bank = Bank::all();
         $this->kode_unik = mt_rand(99,100);
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping + $this->kode_unik;
         $this->verifyForCheckout();
+
         return view('livewire.checkout',[
             'ongkir' => $ongkir,
             'a' => $a,

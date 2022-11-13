@@ -4,6 +4,7 @@
 		<div class="container">
 			<div class="main-content-area">
              @if(Cart::instance('cart')->count() > 0)
+
 				<div class="wrap-iten-in-cart">
                     @if(Session::has('success_message'))
                     <div class="alert alert-success">
@@ -11,7 +12,7 @@
 
                     </div>
                     @endif
-                    {{-- @if(Cart::instance('cart')->count() > 0) --}}
+                    @if(Cart::instance('cart')->count() > 0)
 					<h3 class="box-title">Nama Menu</h3>
 					<ul class="products-cart">
                         @foreach(Cart::instance('cart')->content() as $item)
@@ -40,9 +41,9 @@
 						</li>
                         @endforeach
 					</ul>
-                    {{-- @else
+                    @else
                     <p>Tidak ada pesanan</p>
-                    @endif --}}
+                    @endif
 				</div>
 
 				<div class="summary">
@@ -90,6 +91,10 @@
                                   <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="floatingNama alamat" wire:model="alamat" placeholder="Masukan Alamat Lengkap">
                                     <label for="floatingNoHp">Alamat Lengkap</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingNama alamat" wire:model="nohp" placeholder="Masukan Alamat Lengkap">
+                                    <label for="floatingNoHp">No Handphone</label>
                                   </div>
                                 </div>
                         </div>

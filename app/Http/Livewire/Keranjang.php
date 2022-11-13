@@ -24,6 +24,7 @@ class Keranjang extends Component
     public $email;
     public $kecamatan;
     public $kelurahan;
+    public $nohp;
 
 
     public function mount(){
@@ -35,14 +36,14 @@ class Keranjang extends Component
         $this->nama_lengkap = Auth::user()->name;
         $this->alamat = Auth::user()->alamat;
         $this->email = Auth::user()->email;
-        $this->kecamatan = $this->kecamatan;
+        $this->nohp = Auth::user()->nohp;
 
     }
 
     public function placeOrder() {
 
         $user = User::where('id',Auth::user()->id)->first();
-
+        $user->nohp = $this->nohp;
         $user->alamat = $this->alamat;
         $user->update();
 
@@ -58,6 +59,7 @@ class Keranjang extends Component
             }
 
             $order->alamat = $this->alamat;
+            $order->nohp = $this->nohp;
             $order->save();
 
             return redirect()->route('checkout');
