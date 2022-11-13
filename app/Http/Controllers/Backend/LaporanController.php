@@ -20,7 +20,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         //Rekap Penjualan
@@ -111,7 +111,7 @@ class LaporanController extends Controller
         // return $request;
         if ($request->jenis_laporan == 'rpenjualan') {
             //Notifikasi
-            $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+            $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
             $countNotif = count($pesanan);
             $orderitem = Orderitem::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
             ->get();
@@ -119,20 +119,20 @@ class LaporanController extends Controller
             return view('backend/laporan/rekap-penjualan', compact('orderitem','pesanan','countNotif'));
         }elseif ($request->jenis_laporan == 'rpendapatan') {
              //Notifikasi
-             $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+             $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
              $countNotif = count($pesanan);
              $orderitem = Order::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
-             ->where('status','!=','menunggu-pembayaran')->where('status','!=','cancel')
+             ->where('status','!=','menunggu-konfirmasi')->where('status','!=','cancel')
              ->get();
  
  
              return view('backend/laporan/rekap-pendapatan', compact('orderitem','pesanan','countNotif'));
         }else{
             //Notifikasi
-            $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+            $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
             $countNotif = count($pesanan);
             $orderitem = Order::where('created_at','>=',$request->tgl1)->where('created_at','<=',$request->tgl2)
-            ->where('status','!=','menunggu-pembayaran')->where('status','!=','cancel')
+            ->where('status','!=','menunggu-konfirmasi')->where('status','!=','cancel')
             ->get();
 
 

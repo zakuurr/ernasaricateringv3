@@ -16,7 +16,7 @@ class BankController extends Controller
     public function index()
     {
         $bank = Bank::all();
-        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
 
         return view('backend/bank/index', compact('bank','pesanan','countNotif'));
@@ -29,7 +29,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         return view('backend/bank/create', compact('pesanan','countNotif'));
     }
@@ -82,7 +82,7 @@ class BankController extends Controller
     public function edit($id)
     {
         $bank = Bank::find($id);
-        $pesanan = Order::where('status','konfirmasi')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         return view('backend/bank/edit', compact('bank','pesanan','countNotif'));
     }

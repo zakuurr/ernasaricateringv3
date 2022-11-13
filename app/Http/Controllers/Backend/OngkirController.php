@@ -17,7 +17,7 @@ class OngkirController extends Controller
      */
     public function index()
     {
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         $ongkir = Ongkir::all();
         $ongkir_flat = OngkirFlat::first();
@@ -31,7 +31,7 @@ class OngkirController extends Controller
      */
     public function create()
     {
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         return view('backend/ongkir/create',compact('pesanan','countNotif'));
     }
@@ -73,7 +73,7 @@ class OngkirController extends Controller
      */
     public function edit($id)
     {
-        $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+        $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
         $countNotif = count($pesanan);
         $ongkir = Ongkir::find($id);
         return view('backend/ongkir/edit',compact('pesanan','countNotif','ongkir'));

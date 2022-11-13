@@ -19,7 +19,7 @@ class BackendController extends Controller
      */
     public function index()
     {
-      $pesanan = Order::where('status','menunggu-pembayaran')->orderBy('created_at','DESC')->get();
+      $pesanan = Order::where('status','menunggu-konfirmasi')->orderBy('created_at','DESC')->get();
       $countNotif = count($pesanan);
       $order = Order::get();
       $menu = Menu::get();
