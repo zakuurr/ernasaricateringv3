@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Pesanan;
 use App\Models\Order;
-use App\Models\Orderitem;
+use App\Models\OrderItem;
 use App\Models\PesananDetail;
 use DB;
 
